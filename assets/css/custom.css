@@ -1,0 +1,29 @@
+a {
+  color: #666;
+}
+
+footer {
+  text-align: center;
+}
+
+footer .links {
+  margin-bottom: 20px;
+}
+
+.link {
+  margin-right: 20px;
+}
+
+/* Index */
+
+.presentation p {
+  text-indent: 50px;
+}
+
+.presentation a {
+  text-decoration: underline;
+}
+
+.presentation strong a {
+  font-weight: bold;
+}

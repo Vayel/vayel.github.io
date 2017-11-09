@@ -1,1 +1,17 @@
+title: Vincent Lefoulon (Vayel)
+description: Looking for a 6-month internship in Deep learning from February of 2018. Preferably abroad.
 theme: jekyll-theme-tactile
+linkedin_url: https://www.linkedin.com/in/vincent-lefoulon-87bb1310a/
+zestedesavoir_url: https://zestedesavoir.com/membres/voir/Vayel/
+kaggle_url: https://www.kaggle.com/vincentlefoulon
+
+defaults:
+  - scope:
+      path: "" # All files
+      type: "pages"
+    values:
+      layout: "page"
+  - scope:
+      path: "assets/img"
+    values:
+      image: true
