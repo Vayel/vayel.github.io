@@ -1,7 +1,7 @@
 <nav>
   <ul>
-    <li><a href="/projects/" {% if page.id == 'projects' or page.category == 'projects' %}class="active"{% endif %}>Projects</a></li>
-    <li><a href="/blog/" {% if page.id == 'blog' or page.category == 'blog' %}class="active"{% endif %}>Blog</a></li>
+    <li><a href="/projects/" {% if page.id == 'projects' or page.categories contains 'projects' %}class="active"{% endif %}>Projects</a></li>
+    <li><a href="/blog/" {% if page.id == 'blog' or page.categories contains 'blog' %}class="active"{% endif %}>Blog</a></li>
     <li><a href="{{ site.linkedin_url }}">Experience</a></li>
     <li><a href="{{ '/assets/cv.pdf' | relative_url }}">CV</a></li>
   </ul>
