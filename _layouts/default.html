@@ -26,6 +26,9 @@
         </header>
         <hr>
         <section id="main_content">
+          {% if page.category %}
+            {% include post_header.html %}
+          {% endif %}
           {{ content }}
         </section>
 

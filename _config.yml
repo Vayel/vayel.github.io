@@ -7,7 +7,7 @@ kaggle_url: https://www.kaggle.com/vincentlefoulon
 
 defaults:
   - scope:
-      path: "" # All files
+      path: ""
     values:
       layout: "default"
   - scope:
