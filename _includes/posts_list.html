@@ -6,7 +6,7 @@
       {% endunless %}
     {% endif %}
   <li>
-    <a href="{{ post.url | absolute_url }}">
+    <a href="{{ post.custom_url | default: post.url | absolute_url }}">
       <h4>{{ post.title }}</h4>
     </a>
       <div class="date">
@@ -22,7 +22,7 @@
       <div class="post-excerpt">
         <p class="excerpt">{{ post.excerpt | remove: '<p>' | remove: '</p>' }}</p>
         <p class="more">
-            <a href="{{ post.url | absolute_url }}">Read more...</a>
+            <a href="{{ post.custom_url | default: post.url | absolute_url }}">Read more...</a>
         </p>
       </div>
   </li>
