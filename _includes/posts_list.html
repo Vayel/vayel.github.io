@@ -1,5 +1,5 @@
 <ul class="posts-list">
-  {% for post in site.categories[page.id] %}
+  {% for post in site.categories[page.id] | sort: 'date' %}
     {% if include.subcategory %}
       {% unless post.categories contains include.subcategory %}
         {% break %}
