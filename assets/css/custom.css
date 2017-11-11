@@ -59,6 +59,10 @@ nav a:hover, nav a.active {
 
 /* Posts */
 
+.projects-page > p {
+  text-indent: 30px;
+}
+
 .projects-page > p a {
   text-decoration: underline;
 }
@@ -66,6 +70,8 @@ nav a:hover, nav a.active {
 .projects-page h3 {
   text-align: center;
   color: #666;
+  font-size: 22px;
+  font-family: 'Chivo', 'Helvetica Neue', Helvetica, Arial, serif;
 }
 
 .posts-list li {
@@ -73,11 +79,12 @@ nav a:hover, nav a.active {
   padding: 0;
 }
 
-.posts-list .excerpt {
-  text-indent: 30px;
+.posts-list .tag {
+  font-family: "courier";
 }
 
 .posts-list .excerpt {
+  text-indent: 30px;
   margin: 0;
   margin-top: 10px;
 }
