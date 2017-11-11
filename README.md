@@ -13,9 +13,8 @@ categories: publications
 tags: french mathematics
 source: Zeste de Savoir
 custom_url: https://zestedesavoir.com/tutoriels/925/introduction-au-protocole-wamp-1/
+description: "Markdown description here"
 ---
-
-One-paragraph description here
 ```
 
 ## Add blog entry
@@ -31,9 +30,8 @@ title: ""
 categories: blog
 tags: french mathematics
 custom_url: https://zestedesavoir.com/tutoriels/925/introduction-au-protocole-wamp-1/
+description: "Markdown description here"
 ---
-
-One-paragraph description here
 ```
 
 ### Internal
@@ -46,6 +44,7 @@ this website), create a Markdown file in `_posts/blog` with a content such as:
 title: ""
 categories: blog
 tags: french mathematics
+description: "Markdown description here"
 ---
 
 Markdown content of the article.

@@ -23,7 +23,7 @@
     </div>
 
     <div class="post-excerpt">
-      <p class="excerpt">{{ post.excerpt | remove: '<p>' | remove: '</p>' }}</p>
+      <div class="excerpt">{{ post.description | markdownify }}</div>
       <p class="more">
           <a href="{{ post.custom_url | default: post.url | absolute_url }}">Read more...</a>
       </p>
