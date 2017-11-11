@@ -59,8 +59,13 @@ nav a:hover, nav a.active {
 
 /* Posts */
 
+.projects-page > p a {
+  text-decoration: underline;
+}
+
 .projects-page h3 {
   text-align: center;
+  color: #666;
 }
 
 .posts-list li {
@@ -82,5 +87,3 @@ nav a:hover, nav a.active {
   margin: 0;
   margin-top: 5px;
 }
-
-/* Post */
