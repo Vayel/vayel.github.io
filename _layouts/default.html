@@ -25,7 +25,7 @@
           {% include nav.html %}
         </header>
         <hr>
-        <section id="main_content">
+        <section id="main_content" class="{{ page.id }}-page">
           {% if page.categories %}
             {% include post_header.html %}
           {% endif %}

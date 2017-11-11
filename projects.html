@@ -4,6 +4,23 @@ id: projects
 permalink: /projects/
 ---
 
-{{ site.github.owner_url }}
+<p>
+Let me introduce some projects I worked (or am working) on. Please refer to
+<a href="{{ site.github.owner_url }}">GitHub</a> for a more-complete list.
+</p>
 
-{% include posts_list.html %}
+<h3>Personal projects</h3>
+
+{% include posts_list.html subcategory="personal" %}
+
+<h3>Open-source contributions</h3>
+
+{% include posts_list.html subcategory="contribution" %}
+
+<h3>School projects</h3>
+
+{% include posts_list.html subcategory="school" %}
+
+<h3>Ideas</h3>
+
+{% include posts_list.html subcategory="idea" %}
