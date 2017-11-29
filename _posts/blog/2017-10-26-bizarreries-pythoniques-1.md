@@ -1,5 +1,5 @@
 ---
-title: "Bizarreries Pythoniques #1 : arguments par défaut mutables"
+title: "Bizarreries Pythoniques : arguments par défaut mutables"
 categories: blog
 tags: french python
 custom_url: https://zestedesavoir.com/billets/2204/bizarreries-pythoniques-1-arguments-par-defaut-mutables/
