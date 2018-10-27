@@ -49,3 +49,9 @@ description: "Markdown description here"
 
 Markdown content of the article.
 ```
+
+## Run locally
+
+```
+bundle exec jekyll serve
+```

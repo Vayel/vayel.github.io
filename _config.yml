@@ -1,9 +1,10 @@
 title: Vincent Lefoulon (Vayel)
-description: Master degree student in computer science, who enjoys machine learning, philosophy, climbing and yoga.
+description: Python, Data Science, Education, Philosophy, Climbing...
 theme: jekyll-theme-tactile
 linkedin_url: https://www.linkedin.com/in/vincent-lefoulon-87bb1310a/
 zestedesavoir_url: https://zestedesavoir.com/membres/voir/Vayel/
 kaggle_url: https://www.kaggle.com/vincentlefoulon
+medium_url: https://medium.com/@vincent.lefoulon
 
 defaults:
   - scope:

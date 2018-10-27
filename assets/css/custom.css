@@ -1,3 +1,7 @@
+body, #container {
+  background: none;
+}
+
 a {
   color: #666;
 }
@@ -14,12 +18,12 @@ footer .links {
   margin-bottom: 20px;
 }
 
-footer .contact {
-  margin-bottom: 20px;
+footer .links a {
+  margin-right: 20px;
 }
 
-.link {
-  margin-right: 20px;
+footer .contact {
+  margin-bottom: 20px;
 }
 
 header {
@@ -41,6 +45,12 @@ nav ul li {
 
 nav a:hover, nav a.active {
   color: #303030;
+}
+
+.kaggle {
+  font-family: roboto;
+  color: #429bf4;
+  font-size: 1.2em;
 }
 
 /* Index */
@@ -107,4 +117,17 @@ nav a:hover, nav a.active {
   text-align: right;
   margin: 0;
   margin-top: 5px;
+}
+
+/* Blog */
+
+.blog_wrapper {
+  text-align: center;
+}
+
+.blog_wrapper div {
+  display: inline-block;
+  vertical-align: middle;
+  font-size: 30px;
+  margin: 0 30px;
 }
