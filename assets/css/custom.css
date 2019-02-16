@@ -55,19 +55,19 @@ nav a:hover, nav a.active {
 
 /* Index */
 
-.presentation p {
+.home-page .presentation p {
   text-indent: 50px;
 }
 
-.presentation a {
+.home-page .presentation a {
   text-decoration: underline;
 }
 
-.presentation strong a {
+.home-page .presentation strong a {
   font-weight: bold;
 }
 
-.presentation .photo {
+.home-page .presentation .photo {
   text-align: center;
   background: url("/assets/img/me.png");
   background-size: 128px 128px;
@@ -81,6 +81,28 @@ nav a:hover, nav a.active {
   margin-bottom: 20px;
 }
 
+.home-page h3 {
+  color: #303030;
+  font-size: 25px;
+  text-align: center;
+  margin-top: 20px;
+  margin-bottom: 15px;
+}
+
+.home-page .row {
+    margin-bottom: 20px;
+    display: flex;
+}
+
+.home-page .row > div {
+    flex-grow: 1;
+    text-align: center;
+}
+
+.home-page .github {
+    text-align: center;
+}
+
 /* Posts */
 
 .projects-page > p {
@@ -92,8 +114,7 @@ nav a:hover, nav a.active {
 }
 
 .projects-page h3 {
-  text-align: center;
-  color: #666;
+  color: #303030;
   font-size: 22px;
   font-family: 'Chivo', 'Helvetica Neue', Helvetica, Arial, serif;
 }
