@@ -85,7 +85,7 @@ nav a:hover, nav a.active {
   color: #303030;
   font-size: 25px;
   text-align: center;
-  margin-top: 20px;
+  margin-top: 50px;
   margin-bottom: 15px;
 }
 
@@ -97,6 +97,11 @@ nav a:hover, nav a.active {
 .home-page .row > div {
     flex-grow: 1;
     text-align: center;
+}
+
+.home-page .project .keywords {
+    font-family: "courier";
+    font-size: 12px;
 }
 
 .home-page .github {
