@@ -157,3 +157,15 @@ nav a:hover, nav a.active {
   font-size: 30px;
   margin: 0 30px;
 }
+
+/* Experience */
+
+.experience-page p {
+    text-align: center;
+}
+
+.experience-page p a {
+    font-size: 25px;
+    font-family: 'Chivo', 'Helvetica Neue', Helvetica, Arial, serif;
+    color: #303030;
+}

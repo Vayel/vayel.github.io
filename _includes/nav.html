@@ -2,6 +2,6 @@
   <ul>
     <li><a href="/publications/" {% if page.id == 'publications' or page.categories contains 'publications' %}class="active"{% endif %}>Publications</a></li>
     <li><a href="https://zestedesavoir.com/contenus/tribunes/752/?filter=public" {% if page.id == 'blog' or page.categories contains 'blog' %}class="active"{% endif %}>Blog</a></li>
-    <li><a href="{{ '/assets/cv.pdf' | relative_url }}">CV</a></li>
+    <li><a href="/experience/" {% if page.id == 'experience' %}class="active"{% endif %}>Experience</a></li>
   </ul>
 </nav>
