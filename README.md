@@ -53,5 +53,6 @@ Markdown content of the article.
 ## Run locally
 
 ```
-bundle exec jekyll serve
+make install # Only once
+make
 ```
