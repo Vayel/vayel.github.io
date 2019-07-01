@@ -1,0 +1,18 @@
+{
+  "id": 1,
+  "type": "single_choice",
+  "text": "Par rapport à la fin du XIXe siècle, quel était (à peu près) l'écart de température moyenne à la surface de la Terre il y a 22 000 ans ?",
+  "choices": [
+    "-15°C",
+    "-10°C",
+    "-5°C",
+    "-2°C"
+  ],
+  "answer": 2,
+  "references": [
+    {
+      "text": "Wikipédia - Dernière période glaciaire",
+      "url": "https://fr.wikipedia.org/wiki/Derni%C3%A8re_p%C3%A9riode_glaciaire"
+    }
+  ]
+}
