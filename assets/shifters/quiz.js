@@ -4,7 +4,7 @@ const Quiz = (function() {
       this.type = type;
       this.parent = parent;
       this.question = question;
-      this._inputs = {};
+      this.html = {};
     }
 
     check() {
@@ -38,7 +38,7 @@ const Quiz = (function() {
 
     check() {
       let selected = null;
-      for (let input of Object.values(this._inputs)) {
+      for (let input of this.html.inputs) {
         if (input.checked) {
           selected = parseInt(input.value);
           break;
@@ -48,6 +48,7 @@ const Quiz = (function() {
     }
 
     renderForm(form) {
+      this.html.inputs = [];
       for (let i in this.question.choices) {
         let div = document.createElement("div");
         div.setAttribute("class", "choice");
@@ -58,7 +59,7 @@ const Quiz = (function() {
         input.setAttribute("name", "question-" + this.question.id);
         input.setAttribute("id", id);
         input.setAttribute("value", i);
-        this._inputs[i] = input;
+        this.html.inputs.push(input);
         div.appendChild(input);
 
         let label = document.createElement("label");
@@ -78,9 +79,9 @@ const Quiz = (function() {
 
     check() {
       let selected = new Set();
-      for (let option of this._inputs.select.options) {
-        if (option.selected) {
-          selected.add(parseInt(option.value));
+      for (let input of this.html.inputs) {
+        if (input.checked) {
+          selected.add(parseInt(input.value));
         }
       }
       return new Immutable.Set(selected).equals(
@@ -89,18 +90,26 @@ const Quiz = (function() {
     }
 
     renderForm(form) {
-      let select = document.createElement("select");
-      select.setAttribute("multiple", true);
-
+      this.html.inputs = [];
       for (let i in this.question.choices) {
-        let option = document.createElement("option");
-        option.value = i;
-        option.innerText = this.question.choices[i];
-        select.appendChild(option);
-      }
+        let div = document.createElement("div");
+        div.setAttribute("class", "choice");
 
-      form.appendChild(select);
-      this._inputs.select = select;
+        let id = "question-" + this.question.id + "-" + i;
+        let input = document.createElement("input");
+        input.setAttribute("type", "checkbox");
+        input.setAttribute("id", id);
+        input.setAttribute("value", i);
+        this.html.inputs.push(input);
+        div.appendChild(input);
+
+        let label = document.createElement("label");
+        label.innerText = this.question.choices[i];
+        label.setAttribute("for", id);
+        div.appendChild(label);
+
+        form.appendChild(div);
+      }
     }
   };
 
