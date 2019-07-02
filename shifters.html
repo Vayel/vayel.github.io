@@ -8,20 +8,19 @@ layout:
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
     <link rel="stylesheet" type="text/css" href="{{ '/assets/shifters/style.css' | relative_url }}">
     {% seo %}
   </head>
 
   <body>
-    <div id="container">
-      <header>
-        <h1><a href="/shifters">Shifters</a></h1>
-      </header>
-      <hr>
-      <section id="main_content">
-        <div id="quiz"></div>
-      </section>
-    </div>
+    <header>
+      <img src="{{ '/assets/shifters/logo.png' | relative_url }}" alt="Les Shifters" />
+      <h1>Tester ses connaissances</h1>
+    </header>
+
+    <div id="quiz"></div>
+
     <script src="https://cdnjs.cloudflare.com/ajax/libs/immutable/3.8.2/immutable.min.js"></script>
     <script src="{{ '/assets/shifters/quiz.js' | relative_url }}"></script>
     <script src="{{ '/assets/shifters/questions.js' | relative_url }}"></script>

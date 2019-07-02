@@ -11,14 +11,38 @@ const Quiz = (function() {
       throw "Not implemented";
     }
 
+    renderCheck(correct) {
+      if (correct) {
+        this.html.icon.setAttribute("class", "icon success");
+        this.html.icon.innerHTML = '<i class="fa fa-check-circle-o fa-2x"></i>';
+        return;
+      }
+      else if (correct === false) {
+        this.html.icon.setAttribute("class", "icon error");
+        this.html.icon.innerHTML = '<i class="fa fa-times-circle-o fa-2x"></i>';
+        return;
+      }
+      this.html.icon.setAttribute("class", "icon");
+      this.html.icon.innerHTML = '<i class="fa fa-question-circle-o fa-2x"></i>';
+    }
+
     render() {
       let wrapper = document.createElement("div");    
       wrapper.setAttribute("class", "question " + this.type);
 
+      let header = document.createElement("div");
+      header.setAttribute("class", "header");
+      wrapper.appendChild(header);
+
+      this.html.icon = document.createElement("div");
+      this.html.icon.setAttribute("class", "icon");
+      this.html.icon.innerHTML = '<i class="fa fa-question-circle-o fa-2x"></i>';
+      header.appendChild(this.html.icon);
+
       let title = document.createElement("p");
       title.setAttribute("class", "title");
       title.innerText = this.question.text;
-      wrapper.appendChild(title);
+      header.appendChild(title);
 
       let form = document.createElement("form");
       this.renderForm(form);
@@ -44,6 +68,7 @@ const Quiz = (function() {
           break;
         }
       }
+      if (selected === null) return null;
       return selected === this.question.answer;
     }
 
@@ -84,6 +109,7 @@ const Quiz = (function() {
           selected.add(parseInt(input.value));
         }
       }
+      if (!selected.size) return null;
       return new Immutable.Set(selected).equals(
         new Immutable.Set(this.question.answer)
       );
@@ -115,7 +141,18 @@ const Quiz = (function() {
 
   return (wrapper, questions) => {
     let self = {};
-    self.check = () => questions.map(q => q.check());
+
+    self.check = () => {
+      const correct = questions.map(q => q.check());
+      self.renderCheck(correct);
+      console.log(correct) // TODO: stats
+    };
+
+    self.renderCheck = (correct) => {
+      for (let i in correct) {
+        questions[i].renderCheck(correct[i]);
+      }
+    };
     
     questions = questions.map(json => {
       switch(json.type) {
@@ -129,12 +166,14 @@ const Quiz = (function() {
     });
     questions.map(q => q.render());
     
+    let checkWrapper = document.createElement("div");
+    checkWrapper.setAttribute("class", "check");
+
     let checkBtn = document.createElement("button");
     checkBtn.innerText = "Check";
-    checkBtn.addEventListener("click", (e) => {
-      console.log(self.check())
-    });
-    wrapper.appendChild(checkBtn);
+    checkBtn.addEventListener("click", self.check);
+    checkWrapper.appendChild(checkBtn);
+    wrapper.appendChild(checkWrapper);
 
     return self;
   };
