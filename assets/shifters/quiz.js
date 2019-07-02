@@ -1,4 +1,12 @@
 const Quiz = (function() {
+  function shuffle(a) {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
+
   class AbstractQuestion {
     constructor(type, parent, question) {
       this.type = type;
@@ -56,7 +64,10 @@ const Quiz = (function() {
   }
 
   class SingleChoice extends AbstractQuestion {
-    constructor(parent, question) {
+    constructor(parent, question, shuffleChoices = true) {
+      if (shuffleChoices) {
+        shuffle(question.choices);
+      }
       super("single_choice", parent, question);
     }
 
@@ -98,7 +109,10 @@ const Quiz = (function() {
   };
 
   class MultipleChoice extends AbstractQuestion {
-    constructor(parent, question) {
+    constructor(parent, question, shuffleChoices = true) {
+      if (shuffleChoices) {
+        shuffle(question.choices);
+      }
       super("multiple_choice", parent, question);
     }
 
