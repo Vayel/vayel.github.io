@@ -64,7 +64,7 @@ const Quiz = (function() {
       let selected = null;
       for (let input of this.html.inputs) {
         if (input.checked) {
-          selected = parseInt(input.value);
+          selected = input.value;
           break;
         }
       }
@@ -83,7 +83,7 @@ const Quiz = (function() {
         input.setAttribute("type", "radio");
         input.setAttribute("name", "question-" + this.question.id);
         input.setAttribute("id", id);
-        input.setAttribute("value", i);
+        input.setAttribute("value", this.question.choices[i]);
         this.html.inputs.push(input);
         div.appendChild(input);
 
@@ -106,7 +106,7 @@ const Quiz = (function() {
       let selected = new Set();
       for (let input of this.html.inputs) {
         if (input.checked) {
-          selected.add(parseInt(input.value));
+          selected.add(input.value);
         }
       }
       if (!selected.size) return null;
@@ -125,7 +125,7 @@ const Quiz = (function() {
         let input = document.createElement("input");
         input.setAttribute("type", "checkbox");
         input.setAttribute("id", id);
-        input.setAttribute("value", i);
+        input.setAttribute("value", this.question.choices[i]);
         this.html.inputs.push(input);
         div.appendChild(input);
 

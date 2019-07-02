@@ -12,7 +12,13 @@
     "O3 (ozone)",
     "Rn (radon)"
   ],
-  "answer": [0, 1, 2, 3, 6],
+  "answer": [
+    "H2O (vapeur d’eau)",
+    "CO2 (dioxyde de carbone)",
+    "CH4 (méthane)",
+    "N2O (protoxyde d’azote)",
+    "O3 (ozone)"
+  ],
   "references": [
     {
       "text": "Wikipédia - Gaz à effet de serre",
