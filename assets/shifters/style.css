@@ -15,6 +15,18 @@ header h1 {
   max-width: 500px;
 }
 
+#quiz .unanswered_color {
+  color: #aec6cf;
+}
+
+#quiz .success_color {
+  color: #77dd77;
+}
+
+#quiz .mistake_color {
+  color: #ff6961;
+}
+
 #quiz .question {
   margin-bottom: 50px;
 }
@@ -24,18 +36,6 @@ header h1 {
   align-items: center;
 }
 
-#quiz .question .header .icon {
-  color: #aec6cf;
-}
-
-#quiz .question .header .icon.success {
-  color: #77dd77;
-}
-
-#quiz .question .header .icon.error {
-  color: #ff6961;
-}
-
 #quiz .question .header .title {
   flex-grow: 1;
   margin-left: 20px;
@@ -43,6 +43,30 @@ header h1 {
 
 #quiz .question form {
   padding-left: 60px;
+}
+
+#quiz .stats {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+#quiz .stats .row {
+  margin-right: 80px;
+  margin-bottom: 50px;
+  text-align: center;
+}
+
+#quiz .stats .row:last-child {
+  margin-right: 0;
+}
+
+#quiz .stats .row .icon {
+  margin-bottom: 10px;
+}
+
+#quiz .stats .row .proportion {
+  font-size: 20px;
 }
 
 #quiz .check {

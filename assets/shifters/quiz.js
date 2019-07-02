@@ -13,16 +13,16 @@ const Quiz = (function() {
 
     renderCheck(correct) {
       if (correct) {
-        this.html.icon.setAttribute("class", "icon success");
+        this.html.icon.setAttribute("class", "icon success_color");
         this.html.icon.innerHTML = '<i class="fa fa-check-circle-o fa-2x"></i>';
         return;
       }
       else if (correct === false) {
-        this.html.icon.setAttribute("class", "icon error");
+        this.html.icon.setAttribute("class", "icon mistake_color");
         this.html.icon.innerHTML = '<i class="fa fa-times-circle-o fa-2x"></i>';
         return;
       }
-      this.html.icon.setAttribute("class", "icon");
+      this.html.icon.setAttribute("class", "icon unanswered_color");
       this.html.icon.innerHTML = '<i class="fa fa-question-circle-o fa-2x"></i>';
     }
 
@@ -35,7 +35,7 @@ const Quiz = (function() {
       wrapper.appendChild(header);
 
       this.html.icon = document.createElement("div");
-      this.html.icon.setAttribute("class", "icon");
+      this.html.icon.setAttribute("class", "icon unanswered_color");
       this.html.icon.innerHTML = '<i class="fa fa-question-circle-o fa-2x"></i>';
       header.appendChild(this.html.icon);
 
@@ -140,18 +140,61 @@ const Quiz = (function() {
   };
 
   return (wrapper, questions) => {
-    let self = {};
-
-    self.check = () => {
-      const correct = questions.map(q => q.check());
-      self.renderCheck(correct);
-      console.log(correct) // TODO: stats
+    const check = () => {
+      const isCorrect = questions.map(q => q.check());
+      renderCheck(isCorrect);
+      renderStats(isCorrect);
     };
 
-    self.renderCheck = (correct) => {
-      for (let i in correct) {
-        questions[i].renderCheck(correct[i]);
+    const renderCheck = (isCorrect) => {
+      for (let i in isCorrect) {
+        questions[i].renderCheck(isCorrect[i]);
       }
+    };
+
+    const renderStatsRow = (parent, iconName, colorClass, n, nTotal) => {
+      let row = document.createElement("div");
+      row.setAttribute("class", "row");
+
+      let icon = document.createElement("i");
+      icon.setAttribute("class", colorClass + " icon fa fa-" + iconName + " fa-3x");
+      row.appendChild(icon);
+
+      let proportion = document.createElement("div");
+      proportion.setAttribute("class", "proportion");
+      proportion.innerHTML = '<span class="' + colorClass + '">' + n + "</span> / " + nTotal;
+      row.appendChild(proportion);
+
+      parent.appendChild(row);
+    };
+
+    const renderStats = (isCorrect) => {
+      stats.innerHTML = "";
+      const n = isCorrect.length;
+      
+      renderStatsRow(
+        stats,
+        "check-circle-o",
+        "success_color",
+        isCorrect.filter(x => x).length,
+        n
+      );
+
+      renderStatsRow(
+        stats,
+        "times-circle-o",
+        "mistake_color",
+        isCorrect.filter(x => x === false).length,
+        n
+      );
+
+      renderStatsRow(
+        stats,
+        "question-circle-o",
+        "unanswered_color",
+        isCorrect.filter(x => x === null).length,
+        n
+      );
     };
     
     questions = questions.map(json => {
@@ -166,15 +209,17 @@ const Quiz = (function() {
     });
     questions.map(q => q.render());
     
+    let stats = document.createElement("div");
+    stats.setAttribute("class", "stats");
+    wrapper.appendChild(stats);
+
     let checkWrapper = document.createElement("div");
     checkWrapper.setAttribute("class", "check");
 
     let checkBtn = document.createElement("button");
     checkBtn.innerText = "Check";
-    checkBtn.addEventListener("click", self.check);
+    checkBtn.addEventListener("click", check);
     checkWrapper.appendChild(checkBtn);
     wrapper.appendChild(checkWrapper);
-
-    return self;
   };
 })();
