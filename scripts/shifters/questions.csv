@@ -1,0 +1,66 @@
+"{
+  ""id"": 2,
+  ""text"": ""Parmi ces gaz, lesquels sont des gaz à effet de serre ?"",
+  ""type"": ""multiple_choice"",
+  ""references"": [
+    {
+      ""text"": ""https://fr.wikipedia.org/wiki/Gaz_%C3%A0_effet_de_serre"",
+      ""url"": null
+    },
+    {
+      ""text"": ""http://www.bilans-ges.ademe.fr/documentation/UPLOAD_DOC_FR/index.htm?prg.htm"",
+      ""url"": null
+    }
+  ],
+  ""categories"": [
+    ""climat""
+  ],
+  ""keywords"": [
+    ""ges""
+  ],
+  ""level"": ""basique"",
+  ""choices"": [
+    ""H2O (vapeur d’eau)"",
+    ""CO2 (dioxyde de carbone)"",
+    ""CH4 (méthane)"",
+    ""N2O (protoxyde d’azote)"",
+    ""N2 (diazote)"",
+    ""O2 (dioxygène)"",
+    ""O3 (ozone)"",
+    ""Rn (radon)""
+  ],
+  ""answer"": [
+    ""H2O (vapeur d’eau)"",
+    ""CO2 (dioxyde de carbone)"",
+    ""CH4 (méthane)"",
+    ""N2O (protoxyde d’azote)"",
+    ""O3 (ozone)""
+  ],
+  ""explanation"": """"
+}"
+"{
+  ""id"": 3,
+  ""text"": ""Par quel mécanisme les gaz à effet de serre provoquent un réchauffement climatique ?"",
+  ""type"": ""single_choice"",
+  ""references"": [
+    {
+      ""text"": ""http://www.cnrs.fr/cw/dossiers/dosclim1/sysfacte/effetserre/index.htm#refroidsurf"",
+      ""url"": null
+    }
+  ],
+  ""categories"": [
+    ""climat""
+  ],
+  ""keywords"": [
+    ""température"",
+    ""climat""
+  ],
+  ""level"": ""avancé"",
+  ""choices"": [
+    ""La couche d'ozone se réduit, ce qui laisse entrer plus de rayons solaires dans l'atmosphère"",
+    ""L'atmosphère capte plus le rayonnement ultraviolet émis par le Soleil"",
+    ""La planète évacue moins de chaleur sous forme de rayonnement infrarouge""
+  ],
+  ""answer"": ""La planète évacue moins de chaleur sous forme de rayonnement infrarouge"",
+  ""explanation"": ""Le rayonnement infrarouge émis par la Terre vers l'espace est capté par les GES présent dans l'atmosphère : davantage de GES, c'est davantage de rayonnement infrarouge capté par l'atmosphère, et donc une température moyenne de celle-ci plus élevée. C'est une augmentation du forçage radiatif.""
+}"
