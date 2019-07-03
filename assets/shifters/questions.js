@@ -1,4 +1,4 @@
-const Questions = (function(rootUrl = "/assets/shifters/data/") {
+const Questions = (function(levelsOrder, rootUrl = "/assets/shifters/data/") {
   let cache = {
     categories: {},
     keywords: {},
@@ -20,7 +20,7 @@ const Questions = (function(rootUrl = "/assets/shifters/data/") {
   return {
     categories: () => Object.keys(cache.categories),
 
-    levels: () => cache.levels.map(x => x.name),
+    levels: () => Object.keys(cache.levels),
 
     setup: () => Promise.all([
       addCache("categories"),

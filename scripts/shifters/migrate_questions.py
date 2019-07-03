@@ -10,14 +10,13 @@ import sys
 QUESTIONS_DIRNAME = "questions"
 
 
-def check_dest(path, overwrite):
+def check_dest(path):
     if not os.path.isdir(path):
         raise ValueError(f"{path} is not a directory")
-    if not overwrite and os.listdir(path):
+    if os.listdir(path):
         raise ValueError(
-            f"{path} is not empty. Delete its content or set --overwrite flag"
+            f"{path} is not empty, delete its content first"
         )
-    shutil.rmtree(path)
     os.makedirs(os.path.join(path, QUESTIONS_DIRNAME))
 
 
@@ -64,15 +63,10 @@ if __name__ == "__main__":
         "dest",
         help="The path of the directory to migrate the questions to"
     )
-    parser.add_argument(
-        "--overwrite",
-        help="Clear destination's contents before migrating",
-        action="store_true"
-    )
 
     try:
         args = parser.parse_args()
-        check_dest(args.dest, args.overwrite)
+        check_dest(args.dest)
     except (ValueError, FileNotFoundError) as e:
         print(e)
         sys.exit(1)
