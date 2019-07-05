@@ -12,7 +12,14 @@ const Quiz = (function() {
       this.type = type;
       this.parent = parent;
       this.question = question;
-      this.html = {};
+    }
+
+    _getWrapper() {
+      return $("#question-" + this.question.id);
+    }
+
+    _getForm() {
+      return this._getWrapper().find("form");
     }
 
     check() {
@@ -20,42 +27,35 @@ const Quiz = (function() {
     }
 
     renderCheck(correct) {
+      const icon = this._getWrapper().find(".header .icon");
+      icon.removeClass("success_color mistake_color unanswered_color");
       if (correct) {
-        this.html.icon.setAttribute("class", "icon success_color");
-        this.html.icon.innerHTML = '<i class="fa fa-check-circle-o fa-2x"></i>';
+        icon.addClass("success_color");
+        icon.html('<i class="fa fa-check-circle-o fa-2x"></i>');
         return;
       }
       else if (correct === false) {
-        this.html.icon.setAttribute("class", "icon mistake_color");
-        this.html.icon.innerHTML = '<i class="fa fa-times-circle-o fa-2x"></i>';
+        icon.addClass("mistake_color");
+        icon.html('<i class="fa fa-times-circle-o fa-2x"></i>');
         return;
       }
-      this.html.icon.setAttribute("class", "icon unanswered_color");
-      this.html.icon.innerHTML = '<i class="fa fa-question-circle-o fa-2x"></i>';
+      icon.addClass("unanswered_color");
+      icon.html('<i class="fa fa-question-circle-o fa-2x"></i>');
     }
 
     render() {
-      let wrapper = document.createElement("div");    
-      wrapper.setAttribute("class", "question " + this.type);
-
-      let header = document.createElement("div");
-      header.setAttribute("class", "header");
-      wrapper.appendChild(header);
-
-      this.html.icon = document.createElement("div");
-      this.html.icon.setAttribute("class", "icon unanswered_color");
-      this.html.icon.innerHTML = '<i class="fa fa-question-circle-o fa-2x"></i>';
-      header.appendChild(this.html.icon);
-
-      let title = document.createElement("p");
-      title.setAttribute("class", "title");
-      title.innerText = this.question.text;
-      header.appendChild(title);
-
-      let form = document.createElement("form");
-      this.renderForm(form);
-      wrapper.appendChild(form);
-      this.parent.appendChild(wrapper);
+      $(this.parent).append(
+        '<div id="question-' + this.question.id + '" class="question ' + this.type + '">' +
+          '<div class="header">' +
+            '<div class="icon unanswered_color">' +
+              '<i class="fa fa-question-circle-o fa-2x"></i>' +
+            '</div>' +
+            '<p class="title">' + this.question.text + '</p>' +
+          '</div>' +
+          '<form></form>' +
+        '</div>'
+      );
+      this.renderForm(this._getForm());
     }
 
     renderForm(form) {
@@ -69,42 +69,32 @@ const Quiz = (function() {
         shuffle(question.choices);
       }
       super("single_choice", parent, question);
+      this._inputsName = "question-" + this.question.id;
     }
 
     check() {
-      let selected = null;
-      for (let input of this.html.inputs) {
-        if (input.checked) {
-          selected = input.value;
-          break;
-        }
-      }
-      if (selected === null) return null;
+      let selected = this._getForm().find(
+        "input[name=" + this._inputsName + "]:checked"
+      ).val();
+      if (selected === undefined) return null;
       return selected === this.question.answer;
     }
 
     renderForm(form) {
-      this.html.inputs = [];
-      for (let i in this.question.choices) {
-        let div = document.createElement("div");
-        div.setAttribute("class", "choice");
-
-        let id = "question-" + this.question.id + "-" + i;
-        let input = document.createElement("input");
-        input.setAttribute("type", "radio");
-        input.setAttribute("name", "question-" + this.question.id);
-        input.setAttribute("id", id);
-        input.setAttribute("value", this.question.choices[i]);
-        this.html.inputs.push(input);
-        div.appendChild(input);
-
-        let label = document.createElement("label");
-        label.innerText = this.question.choices[i];
-        label.setAttribute("for", id);
-        div.appendChild(label);
-
-        form.appendChild(div);
-      }
+      form.append($.map(this.question.choices, (choice, i) => {
+        let id = this._inputsName + "-" + i;
+        return (
+          '<div class="choice">' +
+            '<input ' +
+              'id="' + id + '" ' +
+              'type="radio" ' +
+              'name="' + this._inputsName + '" ' +
+              'value="' + choice + '" ' +
+            '/>' +
+            '<label for="' + id + '">' + choice + '</label>' +
+          '</div>'
+        );
+      }));
     }
   };
 
@@ -118,11 +108,9 @@ const Quiz = (function() {
 
     check() {
       let selected = new Set();
-      for (let input of this.html.inputs) {
-        if (input.checked) {
-          selected.add(input.value);
-        }
-      }
+      this._getForm().find("input:checked").each(function() {
+        selected.add(this.value);
+      });
       if (!selected.size) return null;
       return new Immutable.Set(selected).equals(
         new Immutable.Set(this.question.answer)
@@ -130,26 +118,19 @@ const Quiz = (function() {
     }
 
     renderForm(form) {
-      this.html.inputs = [];
-      for (let i in this.question.choices) {
-        let div = document.createElement("div");
-        div.setAttribute("class", "choice");
-
-        let id = "question-" + this.question.id + "-" + i;
-        let input = document.createElement("input");
-        input.setAttribute("type", "checkbox");
-        input.setAttribute("id", id);
-        input.setAttribute("value", this.question.choices[i]);
-        this.html.inputs.push(input);
-        div.appendChild(input);
-
-        let label = document.createElement("label");
-        label.innerText = this.question.choices[i];
-        label.setAttribute("for", id);
-        div.appendChild(label);
-
-        form.appendChild(div);
-      }
+      form.append($.map(this.question.choices, (choice, i) => {
+        let id = this._inputsName + "-" + i;
+        return (
+          '<div class="choice">' +
+            '<input ' +
+              'id="' + id + '" ' +
+              'type="checkbox" ' +
+              'value="' + choice + '" ' +
+            '/>' +
+            '<label for="' + id + '">' + choice + '</label>' +
+          '</div>'
+        );
+      }));
     }
   };
 
@@ -163,7 +144,7 @@ const Quiz = (function() {
 
     check() {
       let answer = [];
-      $(this.html.ul).children().each(function() {
+      this._getForm().find("ul").children().each(function() {
         answer.push(this.innerText);
       });
       return new Immutable.List(answer).equals(
@@ -172,16 +153,14 @@ const Quiz = (function() {
     }
 
     renderForm(form) {
-      let ul = document.createElement("ul");
-      this.html.ul = ul;
-      ul.setAttribute("class", "sortable");
-      form.appendChild(ul);
-      for (let i in this.question.choices) {
-        let item = document.createElement("li");
-        item.innerText = this.question.choices[i];
-        ul.appendChild(item);
-      }
-      $(ul).sortable();
+      form.append(
+        '<ul class="sortable">' +
+        this.question.choices.map(
+          (choice) => '<li>' + choice + '</li>'
+        ).join("") + 
+        '</ul>'
+      );
+      form.find("ul").sortable();
     }
   };
 
@@ -199,23 +178,19 @@ const Quiz = (function() {
     };
 
     const renderStatsRow = (parent, iconName, colorClass, n, nTotal) => {
-      let row = document.createElement("div");
-      row.setAttribute("class", "row");
-
-      let icon = document.createElement("i");
-      icon.setAttribute("class", colorClass + " icon fa fa-" + iconName + " fa-3x");
-      row.appendChild(icon);
-
-      let proportion = document.createElement("div");
-      proportion.setAttribute("class", "proportion");
-      proportion.innerHTML = '<span class="' + colorClass + '">' + n + "</span> / " + nTotal;
-      row.appendChild(proportion);
-
-      parent.appendChild(row);
+      $(parent).append(
+        '<div class="row">' +
+          '<i class="' + (colorClass + ' icon fa fa-' + iconName + ' fa-3x') + '"></i>' +
+          '<div class="proportion">' +
+            '<span class="' + colorClass + '">' + n + '</span> / ' + nTotal +
+          '</div>' +
+        '</div>'
+      );
     };
 
     const renderStats = (isCorrect) => {
-      stats.innerHTML = "";
+      const stats = $(wrapper).find(".stats");
+      stats.html("");
       const n = isCorrect.length;
       
       renderStatsRow(
@@ -244,30 +219,30 @@ const Quiz = (function() {
     };
     
     questions = questions.map(json => {
+      let cls;
       switch(json.type) {
         case "single_choice":
-          return new SingleChoice(wrapper, json);
+          cls = SingleChoice;
+          break;
         case "multiple_choice":
-          return new MultipleChoice(wrapper, json);
+          cls = MultipleChoice;
+          break;
         case "ranking":
-          return new Ranking(wrapper, json);
+          cls = Ranking;
+          break;
         default:
           throw "Unknown question type: " + json.type;
       }
+      return new cls(wrapper, json);
     });
     questions.map(q => q.render());
     
-    let stats = document.createElement("div");
-    stats.setAttribute("class", "stats");
-    wrapper.appendChild(stats);
-
-    let checkWrapper = document.createElement("div");
-    checkWrapper.setAttribute("class", "check");
-
-    let checkBtn = document.createElement("button");
-    checkBtn.innerText = "Check";
-    checkBtn.addEventListener("click", check);
-    checkWrapper.appendChild(checkBtn);
-    wrapper.appendChild(checkWrapper);
+    $(wrapper).append('<div class="stats"></div>');
+    $(wrapper).append(
+      '<div class="check">' +
+        '<button>Vérifier</button>' +
+      '</div>'
+    );
+    $(wrapper).find(".check button").click(check);
   };
 })();
