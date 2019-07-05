@@ -14,9 +14,22 @@ function readQuestionsConfig() {
   return { cols: cols };
 }
 
+function readQuestionGroupsConfig() {
+  var cols = {};
+  var row = 2;
+  var groupName = configSheet.getRange(row, 5).getValue();
+  while (groupName) {
+    cols[groupName] = configSheet.getRange(row, 6).getValue();
+    row++;
+    groupName = configSheet.getRange(row, 5).getValue();
+  }
+  return { cols: cols };
+}
+
 function updateConfig() {
   config = {
     questions: readQuestionsConfig(),
+    questionGroups: readQuestionGroupsConfig(),
     export: {
       nParsedRows: parseInt(configSheet.getRange(3, 4).getValue()),
       errorsCol: configSheet.getRange(1, 4).getValue(),
@@ -125,6 +138,20 @@ function rowToJSON(row) {
       return answer;
     }
   });
+  
+  question.explanation = parseQuestionCell(row, "explanation");
+  
+  question.groups = (function() {;
+    var groups = [], content;
+    for (var group in config.questionGroups.cols) {
+      content = questionsSheet.getRange(config.questionGroups.cols[group] + row).getValue();
+      content = content.trim().toLowerCase();
+      if (content == "oui") {
+        groups.push(group);
+      }
+    }
+    return groups;
+  })();
   
   return {
     question: question,

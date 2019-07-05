@@ -1,0 +1,175 @@
+"{
+  ""id"": 2,
+  ""text"": ""Parmi ces gaz, lesquels sont des gaz à effet de serre ?"",
+  ""type"": ""multiple_choice"",
+  ""references"": [
+    {
+      ""text"": ""https://fr.wikipedia.org/wiki/Gaz_%C3%A0_effet_de_serre"",
+      ""url"": null
+    },
+    {
+      ""text"": ""http://www.bilans-ges.ademe.fr/documentation/UPLOAD_DOC_FR/index.htm?prg.htm"",
+      ""url"": null
+    }
+  ],
+  ""categories"": [
+    ""climat""
+  ],
+  ""keywords"": [
+    ""ges""
+  ],
+  ""level"": ""basique"",
+  ""choices"": [
+    ""H2O (vapeur d’eau)"",
+    ""CO2 (dioxyde de carbone)"",
+    ""CH4 (méthane)"",
+    ""N2O (protoxyde d’azote)"",
+    ""N2 (diazote)"",
+    ""O2 (dioxygène)"",
+    ""O3 (ozone)"",
+    ""Rn (radon)""
+  ],
+  ""answer"": [
+    ""H2O (vapeur d’eau)"",
+    ""CO2 (dioxyde de carbone)"",
+    ""CH4 (méthane)"",
+    ""N2O (protoxyde d’azote)"",
+    ""O3 (ozone)""
+  ],
+  ""explanation"": """",
+  ""groups"": [
+    ""tts gp""
+  ]
+}"
+"{
+  ""id"": 3,
+  ""text"": ""Par quel mécanisme les gaz à effet de serre provoquent un réchauffement climatique ?"",
+  ""type"": ""single_choice"",
+  ""references"": [
+    {
+      ""text"": ""http://www.cnrs.fr/cw/dossiers/dosclim1/sysfacte/effetserre/index.htm#refroidsurf"",
+      ""url"": null
+    }
+  ],
+  ""categories"": [
+    ""climat""
+  ],
+  ""keywords"": [
+    ""température"",
+    ""climat""
+  ],
+  ""level"": ""avancé"",
+  ""choices"": [
+    ""La couche d'ozone se réduit, ce qui laisse entrer plus de rayons solaires dans l'atmosphère"",
+    ""L'atmosphère capte plus le rayonnement ultraviolet émis par le Soleil"",
+    ""La planète évacue moins de chaleur sous forme de rayonnement infrarouge""
+  ],
+  ""answer"": ""La planète évacue moins de chaleur sous forme de rayonnement infrarouge"",
+  ""explanation"": ""Le rayonnement infrarouge émis par la Terre vers l'espace est capté par les GES présent dans l'atmosphère : davantage de GES, c'est davantage de rayonnement infrarouge capté par l'atmosphère, et donc une température moyenne de celle-ci plus élevée. C'est une augmentation du forçage radiatif."",
+  ""groups"": [
+    ""tts gp""
+  ]
+}"
+"{
+  ""id"": 4,
+  ""text"": ""Quelle(s) est(sont) la(es) différence(s) entre climat et météorologie ?"",
+  ""type"": ""multiple_choice"",
+  ""references"": [
+    {
+      ""text"": ""https://www.futura-sciences.com/planete/questions-reponses/meteorologie-climat-meteo-difference-5922/"",
+      ""url"": null
+    }
+  ],
+  ""categories"": [
+    ""climat""
+  ],
+  ""keywords"": [
+    ""météorologie"",
+    ""climat""
+  ],
+  ""level"": ""basique"",
+  ""choices"": [
+    ""Il n'y en a pas"",
+    ""Contrairement à la météorologie, le climat s'étudie sur de grandes surfaces"",
+    ""Contrairement à la météorologie, le climat s'étudie sur le temps long uniquement"",
+    ""L'étude du climat prend en compte plus de paramètres que la météorologie"",
+    ""On a des modèles prédictifs pour la météorologie, pas pour le climat""
+  ],
+  ""answer"": [
+    ""Contrairement à la météorologie, le climat s'étudie sur de grandes surfaces"",
+    ""Contrairement à la météorologie, le climat s'étudie sur le temps long uniquement"",
+    ""L'étude du climat prend en compte plus de paramètres que la météorologie""
+  ],
+  ""explanation"": """",
+  ""groups"": [
+    ""tts gp""
+  ]
+}"
+"{
+  ""id"": 6,
+  ""text"": ""Combien de temps (globalement) la Terre a-t-elle mis pour passer de la dernière ère glaciaire à l'actuelle ère interglaciaire ?"",
+  ""type"": ""multiple_choice"",
+  ""references"": [
+    {
+      ""text"": ""https://fr.wikipedia.org/wiki/Derni%C3%A8re_p%C3%A9riode_glaciaire"",
+      ""url"": null
+    },
+    {
+      ""text"": ""https://www.ipcc.ch/site/assets/uploads/2018/02/WG1AR5_Chapter05_FINAL.pdf"",
+      ""url"": null
+    }
+  ],
+  ""categories"": [
+    ""climat""
+  ],
+  ""keywords"": [
+    ""glaciation""
+  ],
+  ""level"": ""basique"",
+  ""choices"": [
+    ""300 ans"",
+    ""1000 ans"",
+    ""3000 ans"",
+    ""10 000 ans"",
+    ""30 000 ans""
+  ],
+  ""answer"": [
+    ""10 000 ans""
+  ],
+  ""explanation"": """",
+  ""groups"": [
+    ""tts gp""
+  ]
+}"
+"{
+  ""id"": 8,
+  ""text"": ""Par rapport à aujourd'hui, où le niveau moyen des océans était-il situé il y a 22 000 ans ?"",
+  ""type"": ""multiple_choice"",
+  ""references"": [
+    {
+      ""text"": ""https://www.college-de-france.fr/media/edouard-bard/UPL1026748074527999487_Bard13LaRecherche.pdf"",
+      ""url"": null
+    }
+  ],
+  ""categories"": [
+    ""climat""
+  ],
+  ""keywords"": [
+    ""glaciation"",
+    ""océan""
+  ],
+  ""level"": ""b/a"",
+  ""choices"": [
+    ""120 mètres plus bas"",
+    ""12 mètres plus bas"",
+    ""1,2 mètre plus bas"",
+    ""12 mètres plus haut""
+  ],
+  ""answer"": [
+    ""120 mètres plus bas""
+  ],
+  ""explanation"": """",
+  ""groups"": [
+    ""tts gp""
+  ]
+}"
