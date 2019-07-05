@@ -77,3 +77,34 @@ header h1 {
 #quiz .check button {
   cursor: pointer;
 }
+
+#quiz .question.ranking .sortable {
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+  margin: 0;
+  padding: 0;
+}
+
+#quiz .question.ranking .sortable li {
+  list-style: none;
+  border: 1px solid #CCC;
+  background: #f9f7f7;
+  margin: 5px;
+  padding: 5px;
+  height: 22px;
+}
+
+#quiz .question.ranking .sortable li.disabled {
+  opacity: 0.5;
+}
+
+#quiz .question.ranking .sortable li.highlight {
+  background: #FEE25F;
+}
+
+#quiz .question.ranking .sortable li.sortable-placeholder {
+  border: 1px dashed #CCC;
+  background: none;
+}

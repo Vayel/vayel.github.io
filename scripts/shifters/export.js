@@ -42,6 +42,9 @@ function updateConfig() {
 }
 
 function parseCellWithSep(content, sep) {
+  if (typeof content !== "string") {
+    content = content.toString();
+  }
   return content.split(sep).map(function(el) {
     return el.trim();
   }).filter(function(el) {
@@ -78,8 +81,10 @@ function rowToJSON(row) {
   });
   
   question.type = parseQuestionCell(row, "type", errors, function(content) {
-    if (content.toLowerCase() == "choix multiple") return "multiple_choice";
-    if (content.toLowerCase() == "choix unique") return "single_choice";
+    content = content.trim().toLowerCase();
+    if (content == "choix multiple") return "multiple_choice";
+    if (content == "choix unique") return "single_choice";
+    if (content == "classement") return "ranking";
     throw "Le type de question '" + content + "' n'est pas géré pour le moment.";
   });
   
@@ -112,7 +117,7 @@ function rowToJSON(row) {
   });
   
   question.choices = parseQuestionCell(row, "choices", errors, function(content) {
-    if (question.type == "single_choice" || question.type == "multiple_choice") {
+    if (question.type == "single_choice" || question.type == "multiple_choice" || question.type == "ranking") {
       const choices = parseCellWithSep(content, "\n");
       if (choices.length < 2) throw "Il doit au moins y avoir deux choix.";
       const uniqueChoices = choices.filter(function(item, pos) {
@@ -127,7 +132,7 @@ function rowToJSON(row) {
     var answer;
     if (question.type == "single_choice") {
       answer = content.trim();
-      if (question.choices.indexOf(answer) == -1) throw "'" + answer + "' n'apparait pas dans la liste des choix.";
+      if (question.choices.indexOf(answer) == -1) throw 'La réponse "' + choice + '" n\'apparait pas dans la liste des choix.';
       return answer;
     }
     if (question.type == "multiple_choice") {
@@ -135,7 +140,20 @@ function rowToJSON(row) {
       var choice;
       for (var i in answer) {
         choice = answer[i];
-        if (question.choices.indexOf(choice) == -1) throw "'" + choice + "' n'apparait pas dans la liste des choix.";
+        if (question.choices.indexOf(choice) == -1) throw 'La réponse "' + choice + '" n\'apparait pas dans la liste des choix.';
+      }
+      return answer;
+    }
+    if (question.type == "ranking") {
+      answer = parseCellWithSep(content, "\n");
+      var choice;
+      for (var i in answer) {
+        choice = answer[i];
+        if (question.choices.indexOf(choice) == -1) throw 'La réponse "' + choice + '" n\'apparait pas dans la liste des choix.';
+      }
+      for (var i in question.choices) {
+        choice = question.choices[i];
+        if (answer.indexOf(choice) == -1) throw 'Le choix "' + choice + '" n\'apparait pas dans la réponse.';
       }
       return answer;
     }
