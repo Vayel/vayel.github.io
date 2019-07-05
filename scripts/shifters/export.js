@@ -3,25 +3,27 @@ var questionsSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Quest
 var config = null;
 
 function readQuestionsConfig() {
+  var keyVals = SpreadsheetApp.getActiveSpreadsheet().getNamedRanges().filter(function(r) {
+    return r.getName().split(".")[0] == "question";
+  }).map(function(r) {
+    return [
+      r.getName().split(".")[1],
+      r.getRange().getColumn()
+    ];
+  });
   var cols = {};
-  var row = 1;
-  var key = configSheet.getRange(row, 1).getValue();
-  while (key) {
-    cols[key] = configSheet.getRange(row, 2).getValue();
-    row++;
-    key = configSheet.getRange(row, 1).getValue();
+  for (var i = 0; i < keyVals.length; i++) {
+    cols[keyVals[i][0]] = keyVals[i][1];
   }
   return { cols: cols };
 }
 
 function readQuestionGroupsConfig() {
-  var cols = {};
-  var row = 2;
-  var groupName = configSheet.getRange(row, 5).getValue();
-  while (groupName) {
-    cols[groupName] = configSheet.getRange(row, 6).getValue();
-    row++;
-    groupName = configSheet.getRange(row, 5).getValue();
+  var range = SpreadsheetApp.getActiveSpreadsheet().getRangeByName("groups");
+  var cols = {}, cell;
+  for (var j = 1; j <= range.getNumColumns(); j++) {
+    cell = range.getCell(1, j);
+    cols[cell.getValue()] = cell.getColumn();
   }
   return { cols: cols };
 }
@@ -31,10 +33,10 @@ function updateConfig() {
     questions: readQuestionsConfig(),
     questionGroups: readQuestionGroupsConfig(),
     export: {
-      nParsedRows: parseInt(configSheet.getRange(3, 4).getValue()),
-      errorsCol: configSheet.getRange(1, 4).getValue(),
-      outputCol: configSheet.getRange(2, 4).getValue(),
-      validatedQuestionState: configSheet.getRange(4, 4).getValue(),
+      nParsedRows: parseInt(configSheet.getRange(2, 1).getValue()),
+      errorsCol: SpreadsheetApp.getActiveSpreadsheet().getRangeByName("export.errors").getColumn(),
+      outputCol: SpreadsheetApp.getActiveSpreadsheet().getRangeByName("export.output").getColumn(),
+      validatedQuestionState: configSheet.getRange(2, 2).getValue(),
     }
   };
 }
@@ -49,7 +51,7 @@ function parseCellWithSep(content, sep) {
 
 function parseQuestionCell(row, colName, errors, parse) {
   const col = config.questions.cols[colName];
-  const content = questionsSheet.getRange(col + row).getValue();
+  const content = questionsSheet.getRange(row, col).getValue();
   if (!parse) return content;
   try {
     return parse(content);
@@ -144,7 +146,7 @@ function rowToJSON(row) {
   question.groups = (function() {;
     var groups = [], content;
     for (var group in config.questionGroups.cols) {
-      content = questionsSheet.getRange(config.questionGroups.cols[group] + row).getValue();
+      content = questionsSheet.getRange(row, config.questionGroups.cols[group]).getValue();
       content = content.trim().toLowerCase();
       if (content == "oui") {
         groups.push(group);
@@ -169,11 +171,11 @@ function export() {
       continue;
     }
     if (!row.errors.length) {
-      questionsSheet.getRange(config.export.outputCol + i).setValue(
+      questionsSheet.getRange(i, config.export.outputCol).setValue(
         JSON.stringify(row.question, null, 2)
       );
     }
-    questionsSheet.getRange(config.export.errorsCol + i).setValue(
+    questionsSheet.getRange(i, config.export.errorsCol).setValue(
       row.errors.join("\n\n")
     );
   }
