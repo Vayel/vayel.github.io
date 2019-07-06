@@ -92,7 +92,7 @@ function rowToJSON(row) {
     if (content == "choix multiple") return "multiple_choice";
     if (content == "choix unique") return "single_choice";
     if (content == "classement") return "ranking";
-    if (content == "catégorisation") return "categorization";
+    if (content == "catégorisation") return "classification";
     throw "Le type de question '" + content + "' n'est pas géré pour le moment.";
   });
   
@@ -131,7 +131,7 @@ function rowToJSON(row) {
       checkUnique(choices, "les choix");
       return choices;
     }
-    if (question.type == "categorization") {
+    if (question.type == "classification") {
       const elements = parseCellWithSep(content, "\n");
       checkUnique(elements, "les éléments");
       const categories = parseQuestionCell(row, "category_choices", errors, function(content) {
@@ -164,15 +164,19 @@ function rowToJSON(row) {
     if (question.type == "ranking") {
       return question.choices;
     }
-    if (question.type == "categorization") {
-      answer = parseCellWithSep(content, "\n");
+    if (question.type == "classification") {
+      const trueCategories = parseCellWithSep(content, "\n");
       const elements = question.choices[0];
       const categories = question.choices[1];
-      if (elements.length != answer.length) throw "La réponse doit contenir autant de catégories qu'il y a d'éléments.";
+      if (elements.length != trueCategories.length) throw "La réponse doit contenir autant de catégories qu'il y a d'éléments.";
       var cat;
-      for (var i in answer) {
-        cat = answer[i];
+      for (var i in trueCategories) {
+        cat = trueCategories[i];
         if (categories.indexOf(cat) == -1) throw 'La réponse "' + cat + '" n\'apparait pas dans la liste des catégories.';
+      }
+      var answer = {};
+      for (var i in trueCategories) {
+        answer[elements[i]] = trueCategories[i];
       }
       return answer;
     }

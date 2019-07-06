@@ -276,7 +276,7 @@ Erreurs d'export,3
 "{
   ""id"": 18,
   ""text"": ""Relier chaque secteur à sa consommation approximative du pétrole utilisé en France :"",
-  ""type"": ""categorization"",
+  ""type"": ""classification"",
   ""references"": [
     {
       ""text"": ""https://www.iea.org/statistics/?country=FRANCE&year=2016&category=Oil&indicator=ShareOilProductsConsBySector&mode=chart&dataTable=BALANCES"",
@@ -312,15 +312,15 @@ Erreurs d'export,3
       ""Plus de 90%""
     ]
   ],
-  ""answer"": [
-    ""Entre 50 (exclu) et 60%"",
-    ""Moins de 10%"",
-    ""Moins de 10%"",
-    ""Moins de 10%"",
-    ""Moins de 10%"",
-    ""Entre 10 (exclu) et 20%""
-  ],
-  ""explanation"": """",
+  ""answer"": {
+    ""Transport"": ""Entre 50 (exclu) et 60%"",
+    ""Résidentiel"": ""Moins de 10%"",
+    ""Agriculture"": ""Moins de 10%"",
+    ""Tertiaire"": ""Moins de 10%"",
+    ""Industrie"": ""Moins de 10%"",
+    ""Usage non-énergétique (vêtements, etc.)"": ""Entre 10 (exclu) et 20%""
+  },
+  ""explanation"": "" "",
   ""groups"": []
 }",
 "{

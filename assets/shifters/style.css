@@ -108,3 +108,8 @@ header h1 {
   border: 1px dashed #CCC;
   background: none;
 }
+
+#quiz .question.classification .choice > * {
+  display: inline-block;
+  width: 50%;
+}

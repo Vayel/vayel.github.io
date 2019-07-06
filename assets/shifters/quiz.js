@@ -164,6 +164,42 @@ const Quiz = (function() {
     }
   };
 
+  class Classification extends AbstractQuestion {
+    constructor(parent, question, shuffleChoices = true) {
+      if (shuffleChoices) {
+        shuffle(question.choices[0]);
+      }
+      super("classification", parent, question);
+    }
+
+    check() {
+      let elToCat = {};
+      this._getForm().find(".choice").each(function() {
+        const name = $(this).find(".name").html();
+        const cat = $(this).find(".categories").val();
+        elToCat[name] = cat;
+      });
+      return Immutable.Map(elToCat).equals(
+        Immutable.Map(this.question.answer)
+      );
+    }
+
+    renderForm(form) {
+      form.append(this.question.choices[0].map(choice => {
+        return (
+          '<div class="choice">' +
+            '<p class="name">' + choice + '</p>' +
+            '<select class="categories">' +
+              this.question.choices[1].map(
+                cat => '<option value="' + cat + '">' + cat + '</option>'
+              ) +
+            '</select>' +
+          '</div>'
+        );
+      }));
+    }
+  };
+
   return (wrapper, questions) => {
     const check = () => {
       const isCorrect = questions.map(q => q.check());
@@ -229,6 +265,9 @@ const Quiz = (function() {
           break;
         case "ranking":
           cls = Ranking;
+          break;
+        case "classification":
+          cls = Classification;
           break;
         default:
           throw "Unknown question type: " + json.type;
