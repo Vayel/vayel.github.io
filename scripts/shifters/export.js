@@ -2,6 +2,13 @@ var configSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Configur
 var questionsSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Questions");
 var config = null;
 
+function checkUnique(array, errorSuffix) {
+  const unique = array.filter(function(item, pos) {
+    return array.indexOf(item) == pos;
+  });
+  if (unique.length != array.length) throw "Il ne peut y avoir de duplicats dans " + errorSuffix + ".";
+}
+
 function readQuestionsConfig() {
   var keyVals = SpreadsheetApp.getActiveSpreadsheet().getNamedRanges().filter(function(r) {
     return r.getName().split(".")[0] == "question";
@@ -85,6 +92,7 @@ function rowToJSON(row) {
     if (content == "choix multiple") return "multiple_choice";
     if (content == "choix unique") return "single_choice";
     if (content == "classement") return "ranking";
+    if (content == "catégorisation") return "categorization";
     throw "Le type de question '" + content + "' n'est pas géré pour le moment.";
   });
   
@@ -120,11 +128,19 @@ function rowToJSON(row) {
     if (question.type == "single_choice" || question.type == "multiple_choice" || question.type == "ranking") {
       const choices = parseCellWithSep(content, "\n");
       if (choices.length < 2) throw "Il doit au moins y avoir deux choix.";
-      const uniqueChoices = choices.filter(function(item, pos) {
-        return choices.indexOf(item) == pos;
-      });
-      if (uniqueChoices.length != choices.length) throw "Il ne peut y avoir de duplicats dans les choix.";
+      checkUnique(choices, "les choix");
       return choices;
+    }
+    if (question.type == "categorization") {
+      const elements = parseCellWithSep(content, "\n");
+      checkUnique(elements, "les éléments");
+      const categories = parseQuestionCell(row, "category_choices", errors, function(content) {
+        const categories = parseCellWithSep(content, "\n");
+        if (categories.length < 2) throw "Il doit au moins y avoir deux catégories.";
+        checkUnique(categories, "les catégories");
+        return categories;
+      });
+      return [elements, categories];
     }
   });
   
@@ -137,6 +153,7 @@ function rowToJSON(row) {
     }
     if (question.type == "multiple_choice") {
       answer = parseCellWithSep(content, "\n");
+      checkUnique(answer, "la réponse");
       var choice;
       for (var i in answer) {
         choice = answer[i];
@@ -145,15 +162,17 @@ function rowToJSON(row) {
       return answer;
     }
     if (question.type == "ranking") {
+      return question.choices;
+    }
+    if (question.type == "categorization") {
       answer = parseCellWithSep(content, "\n");
-      var choice;
+      const elements = question.choices[0];
+      const categories = question.choices[1];
+      if (elements.length != answer.length) throw "La réponse doit contenir autant de catégories qu'il y a d'éléments.";
+      var cat;
       for (var i in answer) {
-        choice = answer[i];
-        if (question.choices.indexOf(choice) == -1) throw 'La réponse "' + choice + '" n\'apparait pas dans la liste des choix.';
-      }
-      for (var i in question.choices) {
-        choice = question.choices[i];
-        if (answer.indexOf(choice) == -1) throw 'Le choix "' + choice + '" n\'apparait pas dans la réponse.';
+        cat = answer[i];
+        if (categories.indexOf(cat) == -1) throw 'La réponse "' + cat + '" n\'apparait pas dans la liste des catégories.';
       }
       return answer;
     }
@@ -186,6 +205,7 @@ function export() {
   for (var i = 2; i < config.export.nParsedRows; i++) {
     row = rowToJSON(i);
     if (row === null) {
+      questionsSheet.getRange(i, config.export.outputCol).setValue("");
       continue;
     }
     if (!row.errors.length) {

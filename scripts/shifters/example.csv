@@ -1,5 +1,5 @@
-Questions validées,15
-Questions exportées,12
+Questions validées,16
+Questions exportées,15
 Erreurs d'export,3
 ,
 "{
@@ -257,10 +257,10 @@ Erreurs d'export,3
   ],
   ""level"": ""basique"",
   ""choices"": [
-    ""la fonte des glaciers"",
     ""la dilatation thermique de l'eau des océans"",
-    ""la fonte de l'Arctique"",
-    ""la fonte de l'Antarctique""
+    ""la fonte des glaciers"",
+    ""la fonte de l'Antarctique"",
+    ""la fonte de l'Arctique""
   ],
   ""answer"": [
     ""la dilatation thermique de l'eau des océans"",
@@ -272,6 +272,56 @@ Erreurs d'export,3
   ""groups"": [
     ""TTS GP""
   ]
+}",
+"{
+  ""id"": 18,
+  ""text"": ""Relier chaque secteur à sa consommation approximative du pétrole utilisé en France :"",
+  ""type"": ""categorization"",
+  ""references"": [
+    {
+      ""text"": ""https://www.iea.org/statistics/?country=FRANCE&year=2016&category=Oil&indicator=ShareOilProductsConsBySector&mode=chart&dataTable=BALANCES"",
+      ""url"": null
+    }
+  ],
+  ""categories"": [
+    ""climat""
+  ],
+  ""keywords"": [
+    ""pétrole""
+  ],
+  ""level"": ""avancé"",
+  ""choices"": [
+    [
+      ""Transport"",
+      ""Résidentiel"",
+      ""Agriculture"",
+      ""Tertiaire"",
+      ""Industrie"",
+      ""Usage non-énergétique (vêtements, etc.)""
+    ],
+    [
+      ""Moins de 10%"",
+      ""Entre 10 (exclu) et 20%"",
+      ""Entre 20 (exclu) et 30%"",
+      ""Entre 30 (exclu) et 40%"",
+      ""Entre 40 (exclu) et 50%"",
+      ""Entre 50 (exclu) et 60%"",
+      ""Entre 60 (exclu) et 70%"",
+      ""Entre 70 (exclu) et 80%"",
+      ""Entre 80 (exclu) et 90%"",
+      ""Plus de 90%""
+    ]
+  ],
+  ""answer"": [
+    ""Entre 50 (exclu) et 60%"",
+    ""Moins de 10%"",
+    ""Moins de 10%"",
+    ""Moins de 10%"",
+    ""Moins de 10%"",
+    ""Entre 10 (exclu) et 20%""
+  ],
+  ""explanation"": """",
+  ""groups"": []
 }",
 "{
   ""id"": 19,
@@ -397,3 +447,5 @@ Erreurs d'export,3
     ""TTS GP""
   ]
 }",
+Le type de question 'association d'éléments' n'est pas géré pour le moment.,
+Le type de question 'nombre exact' n'est pas géré pour le moment.,
