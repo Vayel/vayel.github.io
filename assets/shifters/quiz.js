@@ -176,7 +176,7 @@ const Quiz = (function() {
       let elToCat = {};
       this._getForm().find(".choice").each(function() {
         const name = $(this).find(".name").html();
-        const cat = $(this).find(".categories").val();
+        const cat = $(this).find(".categories select").val();
         elToCat[name] = cat;
       });
       return Immutable.Map(elToCat).equals(
@@ -185,18 +185,22 @@ const Quiz = (function() {
     }
 
     renderForm(form) {
-      form.append(this.question.choices[0].map(choice => {
-        return (
-          '<div class="choice">' +
-            '<p class="name">' + choice + '</p>' +
-            '<select class="categories">' +
-              this.question.choices[1].map(
-                cat => '<option value="' + cat + '">' + cat + '</option>'
-              ) +
-            '</select>' +
-          '</div>'
-        );
-      }));
+      form.append(
+        '<table>' +
+        this.question.choices[0].map(choice => (
+          '<tr class="choice">' +
+            '<td class="name">' + choice + '</td>' +
+            '<td class="categories">' +
+              '<select>' +
+                this.question.choices[1].map(
+                  cat => '<option value="' + cat + '">' + cat + '</option>'
+                ) +
+              '</select>' +
+            '</td>' +
+          '</tr>'
+        )).join("") +
+        '</table>'
+      );
     }
   };
 

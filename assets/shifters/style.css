@@ -109,7 +109,6 @@ header h1 {
   background: none;
 }
 
-#quiz .question.classification .choice > * {
-  display: inline-block;
-  width: 50%;
+#quiz .question.classification .choice .name {
+  max-width: 50%;
 }
