@@ -31,9 +31,14 @@ def migrate(csvfile, dest):
     keywords = defaultdict(list)
     groups = defaultdict(list)
     reader = csv.reader(csvfile)
+    n_exported = 0
 
     for row in reader:
-        question = json.loads(row[0])
+        try:
+            question = json.loads(row[0])
+        except json.decoder.JSONDecodeError:
+            continue
+        n_exported += 1
         id_ = question["id"]
 
         for cat in question["categories"]:
@@ -53,6 +58,7 @@ def migrate(csvfile, dest):
     dump_json(keywords, os.path.join(dest, "keywords.json"))
     dump_json(levels, os.path.join(dest, "levels.json"))
     dump_json(groups, os.path.join(dest, "groups.json"))
+    print(f"{n_exported} questions exported")
 
 
 if __name__ == "__main__":

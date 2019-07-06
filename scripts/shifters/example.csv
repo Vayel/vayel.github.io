@@ -1,3 +1,7 @@
+Questions validées,15
+Questions exportées,12
+Erreurs d'export,3
+,
 "{
   ""id"": 2,
   ""text"": ""Parmi ces gaz, lesquels sont des gaz à effet de serre ?"",
@@ -38,9 +42,9 @@
   ],
   ""explanation"": """",
   ""groups"": [
-    ""tts gp""
+    ""TTS GP""
   ]
-}"
+}",
 "{
   ""id"": 3,
   ""text"": ""Par quel mécanisme les gaz à effet de serre provoquent un réchauffement climatique ?"",
@@ -67,9 +71,9 @@
   ""answer"": ""La planète évacue moins de chaleur sous forme de rayonnement infrarouge"",
   ""explanation"": ""Le rayonnement infrarouge émis par la Terre vers l'espace est capté par les GES présent dans l'atmosphère : davantage de GES, c'est davantage de rayonnement infrarouge capté par l'atmosphère, et donc une température moyenne de celle-ci plus élevée. C'est une augmentation du forçage radiatif."",
   ""groups"": [
-    ""tts gp""
+    ""TTS GP""
   ]
-}"
+}",
 "{
   ""id"": 4,
   ""text"": ""Quelle(s) est(sont) la(es) différence(s) entre climat et météorologie ?"",
@@ -102,9 +106,9 @@
   ],
   ""explanation"": """",
   ""groups"": [
-    ""tts gp""
+    ""TTS GP""
   ]
-}"
+}",
 "{
   ""id"": 6,
   ""text"": ""Combien de temps (globalement) la Terre a-t-elle mis pour passer de la dernière ère glaciaire à l'actuelle ère interglaciaire ?"",
@@ -138,9 +142,9 @@
   ],
   ""explanation"": """",
   ""groups"": [
-    ""tts gp""
+    ""TTS GP""
   ]
-}"
+}",
 "{
   ""id"": 8,
   ""text"": ""Par rapport à aujourd'hui, où le niveau moyen des océans était-il situé il y a 22 000 ans ?"",
@@ -170,6 +174,226 @@
   ],
   ""explanation"": """",
   ""groups"": [
-    ""tts gp""
+    ""TTS GP""
   ]
-}"
+}",
+"{
+  ""id"": 10,
+  ""text"": ""Quel(s) rôle(s) occupe(nt) le GIEC ? Choisissez toutes les bonnes réponses."",
+  ""type"": ""multiple_choice"",
+  ""references"": [
+    {
+      ""text"": ""https://fr.wikipedia.org/wiki/Groupe_d%27experts_intergouvernemental_sur_l%27%C3%A9volution_du_climat#Objectifs"",
+      ""url"": null
+    }
+  ],
+  ""categories"": [
+    ""climat""
+  ],
+  ""keywords"": [
+    ""giec""
+  ],
+  ""level"": ""basique"",
+  ""choices"": [
+    ""Conseiller les gouvernements sur la question climatique"",
+    ""Faire des projections sur le climat"",
+    ""Vulgariser les notions scientifiques liées au climat"",
+    ""Synthétiser le travail des chercheurs sur le climat""
+  ],
+  ""answer"": [
+    ""Synthétiser le travail des chercheurs sur le climat""
+  ],
+  ""explanation"": """",
+  ""groups"": [
+    ""TTS GP""
+  ]
+}",
+"{
+  ""id"": 13,
+  ""text"": ""En quelle année s'est tenue la première COP ?"",
+  ""type"": ""multiple_choice"",
+  ""references"": [
+    {
+      ""text"": ""https://fr.wikipedia.org/wiki/Conf%C3%A9rence_des_parties"",
+      ""url"": null
+    }
+  ],
+  ""categories"": [
+    ""climat""
+  ],
+  ""keywords"": [
+    ""cop""
+  ],
+  ""level"": ""basique"",
+  ""choices"": [
+    ""1965"",
+    ""1979"",
+    ""1988"",
+    ""1992""
+  ],
+  ""answer"": [
+    ""1979""
+  ],
+  ""explanation"": """",
+  ""groups"": [
+    ""TTS GP""
+  ]
+}",
+"{
+  ""id"": 15,
+  ""text"": ""Classer par ordre d'importance les causes actuelles de l'élévation du niveau des océans"",
+  ""type"": ""ranking"",
+  ""references"": [
+    {
+      ""text"": ""https://www.ipcc.ch/site/assets/uploads/2018/02/WG1AR5_all_final.pdf"",
+      ""url"": null
+    }
+  ],
+  ""categories"": [
+    ""climat""
+  ],
+  ""keywords"": [
+    ""océans""
+  ],
+  ""level"": ""basique"",
+  ""choices"": [
+    ""la fonte des glaciers"",
+    ""la dilatation thermique de l'eau des océans"",
+    ""la fonte de l'Arctique"",
+    ""la fonte de l'Antarctique""
+  ],
+  ""answer"": [
+    ""la dilatation thermique de l'eau des océans"",
+    ""la fonte des glaciers"",
+    ""la fonte de l'Antarctique"",
+    ""la fonte de l'Arctique""
+  ],
+  ""explanation"": ""voir le chapitre 13 du rapport du GP1 du GIEC Figure TS.21 page 99 ou figure 13.10 page 1180 https://www.ipcc.ch/site/assets/uploads/2018/02/WGI_AR5_Fig13-10.jpg"",
+  ""groups"": [
+    ""TTS GP""
+  ]
+}",
+"{
+  ""id"": 19,
+  ""text"": ""Quelle proportion du pétrole brut utilisé en France est importée en 2015 ?\n"",
+  ""type"": ""multiple_choice"",
+  ""references"": [
+    {
+      ""text"": ""https://www.connaissancedesenergies.org/d-ou-vient-le-petrole-brut-importe-en-france-120209"",
+      ""url"": null
+    }
+  ],
+  ""categories"": [
+    ""climat""
+  ],
+  ""keywords"": [
+    ""pétrole"",
+    ""importation""
+  ],
+  ""level"": ""avancé"",
+  ""choices"": [
+    ""Moins de 80%"",
+    ""Entre 80 (exclu) et 90%"",
+    ""Entre 90 (exclu) et 95%"",
+    ""Entre 95 (exclu) et 98%"",
+    ""Plus de 98%""
+  ],
+  ""answer"": [
+    ""Plus de 98%""
+  ],
+  ""explanation"": """",
+  ""groups"": []
+}",
+"{
+  ""id"": 20,
+  ""text"": ""Quelle proportion du gaz utilisé en France est importée en 2016 ?"",
+  ""type"": ""multiple_choice"",
+  ""references"": [
+    {
+      ""text"": ""https://www.statistiques.developpement-durable.gouv.fr/sites/default/files/2018-10/datalab-37-bilan-physique-monetaire-gaz-naturel-2011-2016-juillet-2018.pdf"",
+      ""url"": null
+    }
+  ],
+  ""categories"": [
+    ""climat""
+  ],
+  ""keywords"": [
+    ""gaz"",
+    ""importation""
+  ],
+  ""level"": ""avancé"",
+  ""choices"": [
+    ""Moins de 80%"",
+    ""Entre 80 (exclu) et 90%"",
+    ""Entre 90 (exclu) et 95%"",
+    ""Entre 95 (exclu) et 98%"",
+    ""Plus de 98%""
+  ],
+  ""answer"": [
+    ""Plus de 98%""
+  ],
+  ""explanation"": "" (plus précisement, en 2016 : 99,9%)"",
+  ""groups"": []
+}",
+"{
+  ""id"": 30,
+  ""text"": ""Que signifie l'acronyme GIEC ?"",
+  ""type"": ""multiple_choice"",
+  ""references"": [
+    {
+      ""text"": ""https://fr.wikipedia.org/wiki/Groupe_d%27experts_intergouvernemental_sur_l%27%C3%A9volution_du_climat"",
+      ""url"": null
+    }
+  ],
+  ""categories"": [
+    ""climat""
+  ],
+  ""keywords"": [
+    ""giec""
+  ],
+  ""level"": ""avancé"",
+  ""choices"": [
+    ""Groupe Intergouvernemental pour l'Equilibre Carbone"",
+    ""Groupe d’Intérêt Ecologique sur le Carbone"",
+    ""Groupe International d’Etude du Climat"",
+    ""Groupe d’experts Intergouvernemental sur l'Evolution du Climat""
+  ],
+  ""answer"": [
+    ""Groupe d’experts Intergouvernemental sur l'Evolution du Climat""
+  ],
+  ""explanation"": """",
+  ""groups"": [
+    ""TTS GP""
+  ]
+}",
+"{
+  ""id"": 31,
+  ""text"": ""A quelle fréquence le GIEC publie-t-il ses rapports ?"",
+  ""type"": ""multiple_choice"",
+  ""references"": [
+    {
+      ""text"": ""https://www.ipcc.ch/reports/"",
+      ""url"": null
+    }
+  ],
+  ""categories"": [
+    ""climat""
+  ],
+  ""keywords"": [
+    ""giec""
+  ],
+  ""level"": ""avancé"",
+  ""choices"": [
+    ""Tous les ans"",
+    ""Tous les 2 à 4 ans"",
+    ""Tous les 5 à 7 ans"",
+    ""Tous les 8 à 12 ans.""
+  ],
+  ""answer"": [
+    ""Tous les 5 à 7 ans""
+  ],
+  ""explanation"": """",
+  ""groups"": [
+    ""TTS GP""
+  ]
+}",

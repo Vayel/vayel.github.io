@@ -198,11 +198,3 @@ function export() {
     );
   }
 }
-
-function onOpen() {
-  var ui = SpreadsheetApp.getUi();
-
-  ui.createMenu('Shifters')
-      .addItem('Exporter', 'export')
-      .addToUi();
-}
