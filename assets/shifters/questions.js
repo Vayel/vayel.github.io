@@ -1,37 +1,40 @@
 const Questions = (function(levelsOrder, rootUrl = "/assets/shifters/data/") {
   let cache = {
     categories: {},
+    groups: {},
     keywords: {},
     levels: [],
   };
 
-  function addCache(key) {
-    return fetch(rootUrl + key + ".json")
-      .then((response) => response.json())
-      .then((json) => cache[key] = json);
-  }
+  const addCache = (key) => fetch(rootUrl + key + ".json")
+    .then((response) => response.json())
+    .then((json) => cache[key] = json);
 
-  function fetchQuestion(id) {
-    // TODO: cache?
-    return fetch(rootUrl + "questions/" + id + ".json")
-      .then((response) => response.json());
-  }
+  // TODO: cache?
+  const fetchQuestion = (id) => fetch(rootUrl + "questions/" + id + ".json")
+    .then((response) => response.json());
+
+  const listFromIds = (ids) => {
+    if (ids === null) ids = [];
+    return Promise.all(ids.map(fetchQuestion));
+  };
 
   return {
     categories: () => Object.keys(cache.categories),
 
     levels: () => Object.keys(cache.levels),
 
+    groups: () => Object.keys(cache.groups),
+
     setup: () => Promise.all([
       addCache("categories"),
+      addCache("groups"),
       addCache("levels"),
       addCache("keywords"),
     ]),
 
-    listFromCategory: (category) => {
-      let ids = cache.categories[category];
-      if (ids === null) ids = [];
-      return Promise.all(ids.map(fetchQuestion));
-    },
+    listFromCategory: (category) => listFromIds(cache.categories[category]),
+
+    listFromGroup: (group) => listFromIds(cache.groups[group]),
   };
 })();

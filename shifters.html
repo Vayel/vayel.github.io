@@ -16,9 +16,28 @@ layout:
   <body>
     <header>
       <img src="{{ '/assets/shifters/logo.png' | relative_url }}" alt="Les Shifters" />
-      <h1>Tester ses connaissances</h1>
+      <h1>
+        <a href="/shifters/">Tester ses connaissances</a>
+      </h1>
     </header>
 
+    <div id="spinner">
+      <i class="fa fa-snowflake-o fa-spin fa-3x"></i>
+    </div>
+    <div id="config">
+      <form>
+        <p>Générer une liste de questions :</p>
+      </form>
+      <div class="sep">
+      ou
+      </div>
+      <form id="question_groups_form">
+        <p>Choisir un questionnaire existant :</p>
+        <select></select>
+        <br />
+        <input type="submit" value="Choisir" />
+      </form>
+    </div>
     <div id="quiz"></div>
 
     <script

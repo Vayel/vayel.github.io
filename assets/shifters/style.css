@@ -10,9 +10,43 @@ header h1 {
   margin-left: 50px;
 }
 
+#spinner {
+  text-align: center;
+}
+
+#config {
+  display: none;
+  align-items: center;
+  justify-content: center;
+}
+
+#config .sep {
+  font-size: 50px;
+}
+
+#config form {
+  width: 100%;
+  max-width: 500px;
+  height: 100%;
+  padding: 15px;
+  margin: 0 50px;
+  border: 3px dashed #eee;
+  text-align: center;
+}
+
+#config form p {
+  font-size: 20px;
+}
+
+#config form input[type="submit"] {
+  margin-top: 20px;
+  cursor: pointer;
+}
+
 #quiz {
   margin: auto;
   max-width: 500px;
+  display: none;
 }
 
 #quiz .unanswered_color {

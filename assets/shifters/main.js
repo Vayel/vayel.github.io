@@ -7,13 +7,35 @@
     return a;
   }
 
+  function getConfigFromUrl() {
+    let config = {};
+    const params = new URLSearchParams(window.location.search);
+    for (let p of params) {
+      config[p[0]] = p[1];
+    }
+    return config;
+  }
+
   Questions.setup().then(() => {
-    let cat = Questions.categories()[0];
-    Questions.listFromCategory(cat).then((questions) => {
-      const quiz = Quiz(
-        document.getElementById("quiz"),
-        shuffle(questions)
-      );
+    const config = getConfigFromUrl();
+
+    if (config.group !== undefined) {
+      return Questions.listFromGroup(config.group).then((questions) => {
+        Quiz($("#quiz"), shuffle(questions));
+        $("#quiz").show();
+        $("#spinner").hide();
+      });
+    }
+    
+    $("#question_groups_form").submit(function(e) {
+      e.preventDefault();
+      let group = $("#question_groups_form select").val(); 
+      window.location.href = window.location.pathname + "?" + $.param({ group });
     });
+    $("#question_groups_form select").append(Questions.groups().map(
+      group => '<option value="' + group + '">' + group + '</option>'
+    ));
+    $("#config").css("display", "flex");
+    $("#spinner").hide();
   });
 })();
