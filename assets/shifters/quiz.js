@@ -1,12 +1,31 @@
 const Quiz = (function() {
-  function shuffle(a) {
+  const shuffle = (a) => {
     for (let i = a.length - 1; i > 0; i--) {
       const j = Math.floor(Math.random() * (i + 1));
       [a[i], a[j]] = [a[j], a[i]];
     }
     return a;
-  }
+  };
 
+  const renderExpandableBlock = (parent, className, header, content) => {
+    const el = $(
+      '<div class="' + className + ' expandable">' +
+        '<a href="#" class="header">' +
+          '<i class="fa fa-angle-right" aria-hidden="true"></i>' +
+          header +
+        '</a>' +
+        '<div class="content">' + content + '</div>' +
+      '</div>'
+    );
+    el.appendTo(parent);
+    el.find(".header").click((e) => {
+      e.preventDefault();
+      el.find(".content").toggle();
+      el.find(".header i").toggleClass("fa-angle-right");
+      el.find(".header i").toggleClass("fa-angle-down");
+    });
+  };
+    
   class AbstractQuestion {
     constructor(type, parent, question) {
       this.type = type;
@@ -28,34 +47,27 @@ const Quiz = (function() {
 
     renderCheck(correct) {
       this._getWrapper().find(".help").show();
+      this._getWrapper().find(".help .clue").hide();
 
       const icon = this._getWrapper().find(".header .icon");
       icon.removeClass("success_color mistake_color unanswered_color");
       if (correct) {
         icon.addClass("success_color");
         icon.html('<i class="fa fa-check-circle-o fa-2x"></i>');
-        return;
       }
       else if (correct === false) {
         icon.addClass("mistake_color");
         icon.html('<i class="fa fa-times-circle-o fa-2x"></i>');
-        return;
+        this._getWrapper().find(".help .clue").show();
       }
-      icon.addClass("unanswered_color");
-      icon.html('<i class="fa fa-question-circle-o fa-2x"></i>');
+      else {
+        icon.addClass("unanswered_color");
+        icon.html('<i class="fa fa-question-circle-o fa-2x"></i>');
+        this._getWrapper().find(".help .clue").show();
+      }
     }
 
     render() {
-      const explanation = !this.question.explanation ? "" : (
-        '<div class="explanation_wrapper">' +
-          '<p class="title">Explication :</p>' +
-          '<p class="explanation">' +
-            this.question.explanation.split("\n").join("<br />") +
-          '</p>' +
-        '</div>'
-      );
-      const references = "TODO";
-
       $(this.parent).append(
         '<div id="question-' + this.question.id + '" class="question ' + this.type + '">' +
           '<div class="header">' +
@@ -66,31 +78,48 @@ const Quiz = (function() {
           '</div>' +
           '<form></form>' +
           '<div class="help">' +
-            '<div class="answer_wrapper expandable">' +
-              '<a href="#" class="header">Réponse</a>' +
-              '<div class="content">' +
-                '<div class="answer"></div>' +
-                explanation +
-              '</div>' +
-            '</div>' +
-            '<div class="references expandable">' +
-              '<a href="#" class="header">Sources</a>' +
-              '<div class="content">' + references + '</div>' +
+            '<div class="clue">' +
+              '<i class="fa fa-info-circle"></i>' +
+              "<p>Nous vous conseillons de chercher par vous-même la réponse dans " +
+              "les sources avant de l'afficher.</p>" +
             '</div>' +
           '</div>' +
         '</div>'
       );
       this.renderForm(this._getForm());
+      const help = this._getWrapper().find(".help");
+      renderExpandableBlock(
+        help,
+        "answer_wrapper",
+        "Réponse",
+        (
+          '<div class="answer"></div>' +
+          (!this.question.explanation ? "" : (
+            '<div class="explanation_wrapper">' +
+              '<p class="title">Explication :</p>' +
+              '<p class="explanation">' +
+                this.question.explanation.split("\n").join("<br />") +
+              '</p>' +
+            '</div>'
+          ))
+        )
+      );
+      renderExpandableBlock(
+        help,
+        "references",
+        "Sources",
+        (
+          '<ul>' +
+            this.question.references.map(({ text, url }) => {
+              const item = !url ? text : (
+                '<a href="' + url + '">' + text + '</a>'
+              );
+              return "<li>" + item + "</li>";
+            }) +
+          '</ul>'
+        )
+      );
       this.renderAnswer(this._getWrapper().find(".help .answer_wrapper .answer"));
-
-      for (let className of ["answer_wrapper", "references"]) {
-        (function(expandableBlock) {
-          expandableBlock.find(".header").click((e) => {
-            e.preventDefault();
-            expandableBlock.find(".content").toggle()
-          });
-        })(this._getWrapper().find(".help ." + className));
-      }
     }
 
     renderForm(form) {

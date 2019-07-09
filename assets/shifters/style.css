@@ -77,6 +77,7 @@ header h1 {
 
 #quiz .question form {
   padding-left: 60px;
+  margin-bottom: 20px;
 }
 
 #quiz .stats {
@@ -152,6 +153,46 @@ header h1 {
   display: none;
 }
 
+#quiz .help .clue {
+  display: none;
+  font-size: 14px;
+  display: flex;
+  align-items: center;
+}
+
+#quiz .help .clue i {
+  color: #238ae6;
+  font-size: 20px;
+  margin-right: 10px;
+}
+
+#quiz .help .clue p {
+  flex-grow: 1;
+}
+
+#quiz .help .expandable .header {
+  text-decoration: none;
+  color: #000;
+}
+
+#quiz .help .expandable .header i {
+  margin-right: 5px;
+  font-weight: bold;
+}
+
 #quiz .help .expandable .content {
   display: none;
+  margin-top: 10px;
+  margin-left: 30px;
+  margin-bottom: 20px;
+  border-left: 3px solid #eee;
+  padding-left: 10px;
+}
+
+#quiz .help .explanation_wrapper {
+  margin-top: 30px;
+}
+
+#quiz .help .explanation_wrapper .title {
+  text-decoration: underline;
 }
