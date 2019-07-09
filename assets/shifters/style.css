@@ -34,7 +34,7 @@ header h1 {
   text-align: center;
 }
 
-#config form p {
+#config form .title {
   font-size: 20px;
 }
 

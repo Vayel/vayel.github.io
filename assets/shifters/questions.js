@@ -3,8 +3,16 @@ const Questions = (function(levelsOrder, rootUrl = "/assets/shifters/data/") {
     categories: {},
     groups: {},
     keywords: {},
-    levels: [],
+    levels: {},
   };
+  
+  const shuffle = (a) => {
+    for (let i = a.length - 1; i > 0; i--) {
+      const j = Math.floor(Math.random() * (i + 1));
+      [a[i], a[j]] = [a[j], a[i]];
+    }
+    return a;
+  }
 
   const addCache = (key) => fetch(rootUrl + key + ".json")
     .then((response) => response.json())
@@ -33,7 +41,17 @@ const Questions = (function(levelsOrder, rootUrl = "/assets/shifters/data/") {
       addCache("keywords"),
     ]),
 
-    listFromCategory: (category) => listFromIds(cache.categories[category]),
+    listFromConfig: (config) => {
+      const levelIds = cache.levels[config.level] || [];
+      console.log(levelIds)
+      const categoryIds = cache.categories[config.category] || [];
+      const n = config.number || "all";
+      let ids = new Immutable.Set(levelIds).intersect(categoryIds).toArray();
+      if (n !== "all") {
+        ids = shuffle(ids).slice(0, n);
+      }
+      return listFromIds(ids);
+    },
 
     listFromGroup: (group) => listFromIds(cache.groups[group]),
   };

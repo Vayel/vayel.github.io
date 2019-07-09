@@ -25,14 +25,33 @@ layout:
       <i class="fa fa-snowflake-o fa-spin fa-3x"></i>
     </div>
     <div id="config">
-      <form>
-        <p>Générer une liste de questions :</p>
+      <form id="quiz_config_form">
+        <p class="title">Générer une liste de questions :</p>
+        <p>
+          <label>Nombre :</label>
+          <select id="n_questions_select">
+            <option value="5">5</option>
+            <option value="10">10</option>
+            <option value="15">15</option>
+            <option value="20">20</option>
+            <option value="all">Toutes</option>
+          </select>
+        </p>
+        <p>
+          <label>Catégorie :</label>
+          <select id="category_select"></select>
+        </p>
+        <p>
+          <label>Niveau :</label>
+          <select id="level_select"></select>
+        </p>
+        <input type="submit" value="Générer" />
       </form>
       <div class="sep">
       ou
       </div>
       <form id="question_groups_form">
-        <p>Choisir un questionnaire existant :</p>
+        <p class="title">Choisir un questionnaire existant :</p>
         <select></select>
         <br />
         <input type="submit" value="Choisir" />
