@@ -147,3 +147,11 @@ header h1 {
 #quiz .question.classification .choice .name {
   max-width: 50%;
 }
+
+#quiz .help {
+  display: none;
+}
+
+#quiz .help .expandable .content {
+  display: none;
+}

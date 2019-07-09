@@ -43,7 +43,6 @@ const Questions = (function(levelsOrder, rootUrl = "/assets/shifters/data/") {
 
     listFromConfig: (config) => {
       const levelIds = cache.levels[config.level] || [];
-      console.log(levelIds)
       const categoryIds = cache.categories[config.category] || [];
       const n = config.number || "all";
       let ids = new Immutable.Set(levelIds).intersect(categoryIds).toArray();

@@ -27,6 +27,8 @@ const Quiz = (function() {
     }
 
     renderCheck(correct) {
+      this._getWrapper().find(".help").show();
+
       const icon = this._getWrapper().find(".header .icon");
       icon.removeClass("success_color mistake_color unanswered_color");
       if (correct) {
@@ -44,6 +46,16 @@ const Quiz = (function() {
     }
 
     render() {
+      const explanation = !this.question.explanation ? "" : (
+        '<div class="explanation_wrapper">' +
+          '<p class="title">Explication :</p>' +
+          '<p class="explanation">' +
+            this.question.explanation.split("\n").join("<br />") +
+          '</p>' +
+        '</div>'
+      );
+      const references = "TODO";
+
       $(this.parent).append(
         '<div id="question-' + this.question.id + '" class="question ' + this.type + '">' +
           '<div class="header">' +
@@ -53,12 +65,39 @@ const Quiz = (function() {
             '<p class="title">' + this.question.text + '</p>' +
           '</div>' +
           '<form></form>' +
+          '<div class="help">' +
+            '<div class="answer_wrapper expandable">' +
+              '<a href="#" class="header">Réponse</a>' +
+              '<div class="content">' +
+                '<div class="answer"></div>' +
+                explanation +
+              '</div>' +
+            '</div>' +
+            '<div class="references expandable">' +
+              '<a href="#" class="header">Sources</a>' +
+              '<div class="content">' + references + '</div>' +
+            '</div>' +
+          '</div>' +
         '</div>'
       );
       this.renderForm(this._getForm());
+      this.renderAnswer(this._getWrapper().find(".help .answer_wrapper .answer"));
+
+      for (let className of ["answer_wrapper", "references"]) {
+        (function(expandableBlock) {
+          expandableBlock.find(".header").click((e) => {
+            e.preventDefault();
+            expandableBlock.find(".content").toggle()
+          });
+        })(this._getWrapper().find(".help ." + className));
+      }
     }
 
     renderForm(form) {
+      throw "Not implemented";
+    }
+
+    renderAnswer(parent) {
       throw "Not implemented";
     }
   }
@@ -96,6 +135,10 @@ const Quiz = (function() {
         );
       }));
     }
+
+    renderAnswer(parent) {
+      parent.append(this.question.answer);
+    }
   };
 
   class MultipleChoice extends AbstractQuestion {
@@ -104,6 +147,7 @@ const Quiz = (function() {
         shuffle(question.choices);
       }
       super("multiple_choice", parent, question);
+      this._inputsName = "question-" + this.question.id;
     }
 
     check() {
@@ -131,6 +175,10 @@ const Quiz = (function() {
           '</div>'
         );
       }));
+    }
+
+    renderAnswer(parent) {
+      parent.append(this.question.answer.join("<br />"));
     }
   };
 
@@ -161,6 +209,16 @@ const Quiz = (function() {
         '</ul>'
       );
       form.find("ul").sortable();
+    }
+
+    renderAnswer(parent) {
+      parent.append(
+        '<ol>' +
+          this.question.answer.map(
+            text => '<li>' + text + '</li>'
+          ).join("") +
+        '</ol>'
+      );
     }
   };
 
@@ -200,6 +258,16 @@ const Quiz = (function() {
           '</tr>'
         )).join("") +
         '</table>'
+      );
+    }
+
+    renderAnswer(parent) {
+      parent.append(
+        '<ul>' +
+          $.map(this.question.answer, (cat, el) =>
+            '<li>' + el + ' : ' + cat + '</li>'
+          ).join("") +
+        '</ul>'
       );
     }
   };
