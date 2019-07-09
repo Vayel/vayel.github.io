@@ -182,7 +182,7 @@ function rowToJSON(row) {
     }
   });
   
-  question.explanation = parseQuestionCell(row, "explanation");
+  question.explanation = parseQuestionCell(row, "explanation").trim();
   
   question.groups = (function() {;
     var groups = [], content;
