@@ -240,7 +240,7 @@ function export() {
   var row;
   for (var i = 2; i < config.export.nParsedRows; i++) {
     row = rowToJSON(i);
-    if (row === null) {
+    if (row === null || row.errors.length) {
       questionsSheet.getRange(i, config.export.outputCol).setValue("");
       continue;
     }
