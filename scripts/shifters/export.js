@@ -2,6 +2,12 @@ var configSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Configur
 var questionsSheet = SpreadsheetApp.getActiveSpreadsheet().getSheetByName("Questions");
 var config = null;
 
+function isUrl(text) {
+  const expression = /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._\+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_\+.~#?&//=]*)/gi;
+  const regex = new RegExp(expression);
+  return text.match(regex);
+}
+
 function checkUnique(array, errorSuffix) {
   const unique = array.filter(function(item, pos) {
     return array.indexOf(item) == pos;
@@ -96,15 +102,41 @@ function rowToJSON(row) {
     throw "Le type de question '" + content + "' n'est pas géré pour le moment.";
   });
   
-  // TODO: manage urls
   question.references = parseQuestionCell(row, "references", errors, function(content) {
-    content = parseCellWithSep(content, "\n");
-    return content.map(function(line) {
-      return {
-        text: line,
-        url: null
-      };
-    });
+    const references = parseCellWithSep(content, "\n\n");
+    var parsed = [], ref, text, url;
+    for (var i in references) {
+      ref = references[i].split("\n");
+      if (ref.length > 0) {
+        text = ref[0].trim();
+        if (!text) {
+          throw "Le texte doit contenir des caractères";
+        }
+        if (isUrl(text)) {
+          throw '"' + text + '" est une url. Peut-être avez-vous sauté une ligne sans le vouloir ? Sinon, veuillez utiliser un texte plus descriptif (nom de page, titre du livre...).';
+        }
+      }
+      if (ref.length == 1) {
+        parsed.push({
+          text: text,
+          url: null
+        });
+        continue;
+      }
+      if (ref.length == 2) {
+        url = ref[1].trim();
+        if (!isUrl(url)) {
+          throw '"' + url + '" n\'est pas une url.';
+        }
+        parsed.push({
+          text: text,
+          url: url
+        });
+        continue;
+      }
+      throw 'La reference "' + references[i] + '" doit être sur une ou deux lignes seulement.';
+    }
+    return parsed;
   });
   
   question.categories = parseQuestionCell(row, "categories", errors, function(content) {
