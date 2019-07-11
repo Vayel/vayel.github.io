@@ -46,10 +46,9 @@ function updateConfig() {
     questions: readQuestionsConfig(),
     questionGroups: readQuestionGroupsConfig(),
     export: {
-      nParsedRows: parseInt(configSheet.getRange(2, 1).getValue()),
       errorsCol: SpreadsheetApp.getActiveSpreadsheet().getRangeByName("export.errors").getColumn(),
       outputCol: SpreadsheetApp.getActiveSpreadsheet().getRangeByName("export.output").getColumn(),
-      validatedQuestionState: configSheet.getRange(2, 2).getValue(),
+      validatedQuestionState: configSheet.getRange(2, 1).getValue(),
     }
   };
 }
@@ -230,22 +229,25 @@ function rowToJSON(row) {
   };
 }
 
-function export() {
+function export(rowIndex) {
+  if (rowIndex === undefined) return;
   updateConfig();
   
-  var row;
-  for (var i = 2; i < config.export.nParsedRows; i++) {
-    row = rowToJSON(i);
-    questionsSheet.getRange(i, config.export.errorsCol).setValue(
-      row.errors.join("\n\n")
-    );
-    if (row.errors.length || !row.isValidated) {
-      questionsSheet.getRange(i, config.export.outputCol).setValue("");
-    }
-    else {
-      questionsSheet.getRange(i, config.export.outputCol).setValue(
-        JSON.stringify(row.question, null, 2)
-      );
-    }
+  row = rowToJSON(rowIndex);
+  questionsSheet.getRange(rowIndex, config.export.errorsCol).setValue(
+    row.errors.join("\n\n")
+  );
+  if (row.errors.length || !row.isValidated) {
+    questionsSheet.getRange(rowIndex, config.export.outputCol).setValue("");
   }
+  else {
+    questionsSheet.getRange(rowIndex, config.export.outputCol).setValue(
+      JSON.stringify(row.question, null, 2)
+    );
+  }
+}
+
+function onEdit(e) {
+  if (e.range.getSheet().getIndex() != questionsSheet.getIndex()) return;
+  export(e.range.getRow());
 }
