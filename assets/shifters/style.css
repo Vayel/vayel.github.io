@@ -15,8 +15,12 @@ header h1 {
 header h1 a {
   font-weight: normal;
   text-decoration: none;
-  color: #bb7a66;
   font-variant: small-caps;
+  color: #bb7a66;
+}
+
+header h1 a span {
+  color: #ed7a07;
 }
 
 #spinner {
@@ -65,6 +69,13 @@ header h1 a {
   align-items: center;
 }
 
+#config form .inputs select {
+  background: #FFF;
+  border: 1px solid #135996;
+  color: #135996;
+  padding: 5px 10px;
+}
+
 #config form table {
   margin: auto;
   border-spacing: 0 10px;
@@ -73,7 +84,7 @@ header h1 a {
 #config form table .label {
   text-align: right;
   padding-right: 10px;
-  color: #135996;
+  color: #bb7a66;
   font-variant: small-caps;
 }
 
@@ -83,6 +94,7 @@ header h1 a {
 
 #config form table .input > * {
   min-width: 100%;
+  text-align: center;
 }
 
 #config form input[type="submit"] {
