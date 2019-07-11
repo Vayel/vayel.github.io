@@ -78,11 +78,6 @@ function parseQuestionCell(row, colName, errors, parse) {
 }
 
 function rowToJSON(row) {
-  const state = parseQuestionCell(row, "state");
-  if (state != config.export.validatedQuestionState) {
-    return null;
-  }
-  
   var question = {};
   var errors = [];
   
@@ -229,6 +224,7 @@ function rowToJSON(row) {
   })();
   
   return {
+    isValidated: parseQuestionCell(row, "state") == config.export.validatedQuestionState,
     question: question,
     errors: errors
   };
@@ -240,17 +236,16 @@ function export() {
   var row;
   for (var i = 2; i < config.export.nParsedRows; i++) {
     row = rowToJSON(i);
-    if (row === null || row.errors.length) {
+    questionsSheet.getRange(i, config.export.errorsCol).setValue(
+      row.errors.join("\n\n")
+    );
+    if (row.errors.length || !row.isValidated) {
       questionsSheet.getRange(i, config.export.outputCol).setValue("");
-      continue;
     }
-    if (!row.errors.length) {
+    else {
       questionsSheet.getRange(i, config.export.outputCol).setValue(
         JSON.stringify(row.question, null, 2)
       );
     }
-    questionsSheet.getRange(i, config.export.errorsCol).setValue(
-      row.errors.join("\n\n")
-    );
   }
 }
