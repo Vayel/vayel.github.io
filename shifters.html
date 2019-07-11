@@ -17,7 +17,7 @@ layout:
     <header>
       <img src="{{ '/assets/shifters/logo.png' | relative_url }}" alt="Les Shifters" />
       <h1>
-        <a href="/shifters/">Tester ses connaissances</a>
+        <a href="/shifters/">Tester ses connaissances sur la décarbonation de l'économie</a>
       </h1>
     </header>
 
@@ -26,35 +26,52 @@ layout:
     </div>
     <div id="config">
       <form id="quiz_config_form">
-        <p class="title">Générer une liste de questions :</p>
-        <p>
-          <label>Nombre :</label>
-          <select id="n_questions_select">
-            <option value="5">5</option>
-            <option value="10">10</option>
-            <option value="15">15</option>
-            <option value="20">20</option>
-            <option value="all">Toutes</option>
-          </select>
-        </p>
-        <p>
-          <label>Catégorie :</label>
-          <select id="category_select"></select>
-        </p>
-        <p>
-          <label>Niveau :</label>
-          <select id="level_select"></select>
-        </p>
-        <input type="submit" value="Générer" />
+        <fieldset>
+          <legend class="title">Générer une liste de questions</legend>
+          <table class="inputs">
+            <tr>
+              <td class="label"> 
+                <label>Nombre :</label>
+              </td>
+              <td class="input">
+                <select id="n_questions_select">
+                  <option value="5">5</option>
+                  <option value="10">10</option>
+                  <option value="15">15</option>
+                  <option value="20">20</option>
+                  <option value="all">Toutes</option>
+                </select>
+              </td>
+            </tr>
+            <tr>
+              <td class="label">
+                <label>Catégorie :</label>
+              </td>
+              <td class="input">
+                <select id="category_select"></select>
+              </td>
+            </tr>
+            <tr>
+              <td class="label">
+                <label>Niveau :</label>
+              </td>
+              <td class="input">
+                <select id="level_select"></select>
+              </td>
+            </tr>
+          </table>
+
+          <input type="submit" value="Générer" />
+        </fieldset>
       </form>
-      <div class="sep">
-      ou
-      </div>
       <form id="question_groups_form">
-        <p class="title">Choisir un questionnaire existant :</p>
-        <select></select>
-        <br />
-        <input type="submit" value="Choisir" />
+        <fieldset>
+          <legend class="title">Choisir un questionnaire existant</legend>
+          <div class="inputs">
+            <select></select>
+          </div>
+          <input type="submit" value="Choisir" />
+        </fieldset>
       </form>
     </div>
     <div id="quiz"></div>

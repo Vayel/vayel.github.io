@@ -6,8 +6,17 @@ header {
 }
 
 header h1 {
-  font-weight: normal;
+  max-width: 500px;
+  text-align: center;
+  margin: 0;
   margin-left: 50px;
+}
+
+header h1 a {
+  font-weight: normal;
+  text-decoration: none;
+  color: #bb7a66;
+  font-variant: small-caps;
 }
 
 #spinner {
@@ -16,7 +25,7 @@ header h1 {
 
 #config {
   display: none;
-  align-items: center;
+  align-items: top;
   justify-content: center;
 }
 
@@ -26,21 +35,63 @@ header h1 {
 
 #config form {
   width: 100%;
-  max-width: 500px;
-  height: 100%;
-  padding: 15px;
+  max-width: 450px;
+  min-height: 100%;
   margin: 0 50px;
-  border: 3px dashed #eee;
+  padding: 0 15px 15px 15px;
   text-align: center;
+}
+
+#config form fieldset {
+  border: 1px solid #135996;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
 }
 
 #config form .title {
   font-size: 20px;
+  padding: 5px 10px;
+  margin: 10px auto 10px auto;
+  color: #135996;
+  font-variant: small-caps;
+  background: #FFF;
+}
+
+#config form .inputs {
+  flex-grow: 1;
+  display: flex;
+  align-items: center;
+}
+
+#config form table {
+  margin: auto;
+  border-spacing: 0 10px;
+}
+
+#config form table .label {
+  text-align: right;
+  padding-right: 10px;
+  color: #135996;
+  font-variant: small-caps;
+}
+
+#config form table .input {
+  text-align: left;
+}
+
+#config form table .input > * {
+  min-width: 100%;
 }
 
 #config form input[type="submit"] {
-  margin-top: 20px;
   cursor: pointer;
+  padding: 5px 10px;
+  border: 1px solid #f08139;
+  background: #FFF;
+  color: #f08139;
+  font-weight: bold;
 }
 
 #quiz {
