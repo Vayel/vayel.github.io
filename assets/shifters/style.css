@@ -175,11 +175,21 @@ header h1 a span {
 
 #quiz .check {
   text-align: center;
-  margin-bottom: 50px;
+  margin-bottom: 20px;
 }
 
 #quiz .check button {
   cursor: pointer;
+}
+
+#quiz .up {
+  text-align: center;
+  margin-bottom: 20px;
+}
+
+#quiz .up a {
+  color: #e6e3e3;
+  font-size: 45px;
 }
 
 #quiz .question form {

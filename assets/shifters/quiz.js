@@ -315,6 +315,7 @@ const Quiz = (function() {
       const isCorrect = questions.map(q => q.check());
       renderCheck(isCorrect);
       renderStats(isCorrect);
+      document.body.scrollIntoView(false);
     };
 
     const renderCheck = (isCorrect) => {
@@ -392,6 +393,14 @@ const Quiz = (function() {
         '<button>Vérifier</button>' +
       '</div>'
     );
+    $(wrapper).append(
+      '<div class="up">' +
+        '<a href="#" title="Remonter en haut de page">' +
+          '<i class="fa fa-arrow-circle-o-up" aria-hidden="true"></i>' +
+        '</a>' +
+      '</div>'
+    );
+
     $(wrapper).find(".check button").click(check);
   };
 })();
