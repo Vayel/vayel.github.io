@@ -207,7 +207,13 @@ const Quiz = (function() {
     }
 
     renderAnswer(parent) {
-      parent.append(this.question.answer.join("<br />"));
+      parent.append(
+        '<ul>' +
+          this.question.answer.map(
+            text => '<li>' + text + '</li>'
+          ).join("") +
+        '</ul>'
+      );
     }
   };
 
@@ -292,11 +298,14 @@ const Quiz = (function() {
 
     renderAnswer(parent) {
       parent.append(
-        '<ul>' +
-          $.map(this.question.answer, (cat, el) =>
-            '<li>' + el + ' : ' + cat + '</li>'
-          ).join("") +
-        '</ul>'
+        '<table>' +
+          $.map(this.question.answer, (cat, el) => (
+            '<tr>' +
+              '<td class="name">' + el + '</td>' +
+              '<td>' + cat + '</td>' +
+            '</tr>'
+          )).join("") +
+        '</table>'
       );
     }
   };
