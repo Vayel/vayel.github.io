@@ -96,6 +96,8 @@ function rowToJSON(row) {
     throw "Le type de question '" + content + "' n'est pas géré pour le moment.";
   });
   
+  if (!question.type) return null;
+  
   question.references = parseQuestionCell(row, "references", errors, function(content) {
     const references = parseCellWithSep(content, "\n\n");
     var parsed = [], ref, text, url;
@@ -104,10 +106,10 @@ function rowToJSON(row) {
       if (ref.length > 0) {
         text = ref[0].trim();
         if (!text) {
-          throw "Le texte doit contenir des caractères";
+          throw "Le texte de la source doit contenir des caractères";
         }
         if (isUrl(text)) {
-          throw '"' + text + '" est une url. Peut-être avez-vous sauté une ligne sans le vouloir ? Sinon, veuillez utiliser un texte plus descriptif (nom de page, titre du livre...).';
+          throw 'La source "' + text + '" est une url. Peut-être avez-vous sauté une ligne sans le vouloir ? Sinon, veuillez utiliser un texte plus descriptif (nom de page, titre du livre...).';
         }
       }
       if (ref.length == 1) {
@@ -120,7 +122,7 @@ function rowToJSON(row) {
       if (ref.length == 2) {
         url = ref[1].trim();
         if (!isUrl(url)) {
-          throw '"' + url + '" n\'est pas une url.';
+          throw 'L\'url "' + url + '" de la source n\'est pas une url.';
         }
         parsed.push({
           text: text,
@@ -128,8 +130,9 @@ function rowToJSON(row) {
         });
         continue;
       }
-      throw 'La reference "' + references[i] + '" doit être sur une ou deux lignes seulement.';
+      throw 'La source "' + references[i] + '" doit être sur une ou deux lignes seulement.';
     }
+    if (!parsed.length) throw "Il manque une source.";
     return parsed;
   });
   
@@ -234,10 +237,15 @@ function export(rowIndex) {
   updateConfig();
   
   row = rowToJSON(rowIndex);
-  questionsSheet.getRange(rowIndex, config.export.errorsCol).setValue(
-    row.errors.join("\n\n")
-  );
-  if (row.errors.length || !row.isValidated) {
+  if (row === null) {
+    questionsSheet.getRange(rowIndex, config.export.errorsCol).setValue("");
+  }
+  else {
+    questionsSheet.getRange(rowIndex, config.export.errorsCol).setValue(
+      row.errors.join("\n\n")
+    );
+  }
+  if (row === null || row.errors.length || !row.isValidated) {
     questionsSheet.getRange(rowIndex, config.export.outputCol).setValue("");
   }
   else {
