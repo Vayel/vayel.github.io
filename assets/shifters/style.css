@@ -70,10 +70,14 @@ header h1 a span {
 }
 
 #config form .inputs select {
-  background: #FFF;
-  border: 1px solid #135996;
-  color: #135996;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  background: url(data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAA8AAAAPBAMAAADJ+Ih5AAAAMFBMVEUAAAD///////////////////////////////////////////////////////////87TQQwAAAAD3RSTlMABxITFRocL0xdaHfA1e23cmSMAAAAQUlEQVQIHWNgwA0iwVJaDAznNwBZzO8TGGR/Axl2PxgYGO9vAAo0AHlAIZAASGgLWAAo9B8sABICqQABcQiFkwQA24gRgZdnCfoAAAAASUVORK5CYII=) 90% / 15% no-repeat #135996;
+  border: none;
+  color: #FFF;
   padding: 5px 10px;
+  padding-right: 25px;
 }
 
 #config form table {
@@ -84,7 +88,7 @@ header h1 a span {
 #config form table .label {
   text-align: right;
   padding-right: 10px;
-  color: #bb7a66;
+  color: #000;
   font-variant: small-caps;
 }
 
