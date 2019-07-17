@@ -13,13 +13,13 @@
 #     H3 : Horizon lointain
 #-----------------------------------------------------------------------------
 # Type d'indice : saisonnier
-                  (1 - hiver, 2 - printemps, 3 - été, 4 - automne)
+#                  (1 - hiver, 2 - printemps, 3 - Ã©tÃ©, 4 - automne)
 #-----------------------------------------------------------------------------
 # Indices : 
-#     NORSSWI : Intégration de Indicateur sècheresse d'humidité des sols (null)
+#     NORSSWI : IntÃ©gration de Indicateur sÃ¨cheresse d'humiditÃ© des sols (null)
 #-----------------------------------------------------------------------------
 # Format des enregistrements 
-# Point;Latitude;Longitude;Contexte;Période;Saison;NORSSWI;
+# Point;Latitude;Longitude;Contexte;PÃ©riode;Saison;NORSSWI;
 #-----------------------------------------------------------------------------
 282;41.4087;9.1577;A2;H1;1;-0.8;
 282;41.4087;9.1577;A2;H1;2;-0.29;

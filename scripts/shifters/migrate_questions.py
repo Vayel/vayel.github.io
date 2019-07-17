@@ -3,7 +3,6 @@ from collections import defaultdict
 import csv
 import json
 import os
-import shutil
 import sys
 
 
