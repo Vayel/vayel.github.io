@@ -8,26 +8,35 @@ layout:
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
+    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
     <link rel="stylesheet" type="text/css" href="{{ '/assets/water_scarcity/style.css' | relative_url }}">
     {% seo %}
   </head>
 
   <body>
-    <p>
-    Des indices saisonniers SSWI > en pièce jointe format txt. Pour chacune des zones (sous forme de mailles) tu as l'époque concernée (l'horizon), la saison concernée et la valeur de l'indice SSWI
-    </p>
-    <p>
-    Des zones karstiques: https://www.data.gouv.fr/fr/datasets/zones-karstiques-metropole/
-    </p>
+    <div id="sswi_config">
+      <p>
+        <label>Horizon :</label>
+        <select id="sswi_horizon">
+          <option value="H1">H1</option>
+          <option value="H2">H2</option>
+          <option value="H3">H3</option>
+        </select>
+      </p>
+      <p>
+        <label>Saison :</label>
+        <select id="sswi_season">
+          <option value="spring">Printemps</option>
+          <option value="summer">Eté</option>
+          <option value="autumn">Automne</option>
+          <option value="winter">Hiver</option>
+        </select>
+      </p>
+    </div>
+    <div id="sswi_map"></div>
 
-    <p>
-    il y a 2 types de calcaires remprésentés: les calcaires affleurants (qui nous intéressent) + les calcaires profonds nommés impulvums (qui ne nous intéressent pas)
-    </p>
-    <p>
-    sur les calcaires affleurants il faudrait réussir à rendre visible ceux uniquement présents sur les massifs qui sont considérés comme des roches très karstiques. Voir > https://fbreuneval.github.io/evaluer-risques.html > voir tuto 1.
-    </p>
-
+    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src="{{ '/assets/water_scarcity/sswi.js' | relative_url }}"></script>
     <script src="{{ '/assets/water_scarcity/main.js' | relative_url }}"></script>
   </body>
 </html>
