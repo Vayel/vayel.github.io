@@ -24,7 +24,7 @@ def dump_json(data, path):
 
 
 def convert(csvfile, dest):
-    data = defaultdict(  # Horizon
+    features = defaultdict(  # Horizon
         lambda: defaultdict(list)  # Season
     )
     reader = csv.reader(csvfile, delimiter=";")
@@ -41,16 +41,24 @@ def convert(csvfile, dest):
         sswi = float(sswi)
         lat = float(lat)
         lng = float(lng)
-        data[horizon][season].append(dict(
-            lat=lat,
-            lng=lng,
-            sswi=sswi,
-        ))
+        features[horizon][season].append({
+            "type": "Feature",
+            "geometry": {
+                "type": "Point",
+                "coordinates": [lng, lat],
+            },
+            "properties": {
+                "sswi": sswi,
+            }
+        })
 
-    for horizon, horizon_data in data.items():
+    for horizon, horizon_data in features.items():
         for season, points in horizon_data.items():
             dump_json(
-                points,
+                {
+                    "type": "FeatureCollection",
+                    "features": points,
+                },
                 os.path.join(dest, f"{horizon}_{season}.json")
             )
 

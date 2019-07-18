@@ -8,7 +8,9 @@ layout:
 <html lang="fr">
   <head>
     <meta charset="utf-8" />
-    <link rel="stylesheet" href="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.css" />
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.5.1/dist/leaflet.css"
+   integrity="sha512-xwE/Az9zrjBIphAcBb3F6JVqxf46+CDLwfLMHloNu6KEQCAWi6HcDUbeOfBIptF7tcCzusKFjFw2yuvEpDL9wQ=="
+   crossorigin=""/>
     <link rel="stylesheet" type="text/css" href="{{ '/assets/water_scarcity/style.css' | relative_url }}">
     {% seo %}
   </head>
@@ -35,7 +37,9 @@ layout:
     </div>
     <div id="sswi_map"></div>
 
-    <script src="http://cdn.leafletjs.com/leaflet/v0.7.7/leaflet.js"></script>
+    <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
+   integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
+   crossorigin=""></script>
     <script src="{{ '/assets/water_scarcity/sswi.js' | relative_url }}"></script>
     <script src="{{ '/assets/water_scarcity/main.js' | relative_url }}"></script>
   </body>
