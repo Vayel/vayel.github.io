@@ -2,6 +2,7 @@ import argparse
 from collections import defaultdict
 import csv
 import json
+import math
 import os
 import sys
 
@@ -28,6 +29,8 @@ def convert(csvfile, dest):
         lambda: defaultdict(list)  # Season
     )
     reader = csv.reader(csvfile, delimiter=";")
+    min_sswi = math.inf
+    max_sswi = -math.inf
 
     for row in reader:
         try:
@@ -38,9 +41,11 @@ def convert(csvfile, dest):
             continue
 
         season = SEASONS[int(season) - 1]
-        sswi = float(sswi)
         lat = float(lat)
         lng = float(lng)
+        sswi = float(sswi)
+        min_sswi = min(sswi, min_sswi)
+        max_sswi = max(sswi, max_sswi)
         features[horizon][season].append({
             "type": "Feature",
             "geometry": {
@@ -56,8 +61,11 @@ def convert(csvfile, dest):
         for season, points in horizon_data.items():
             dump_json(
                 {
-                    "type": "FeatureCollection",
-                    "features": points,
+                    "sswi": { "min": min_sswi, "max": max_sswi },
+                    "geojson": {
+                        "type": "FeatureCollection",
+                        "features": points,
+                    }
                 },
                 os.path.join(dest, f"{horizon}_{season}.json")
             )

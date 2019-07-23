@@ -1,4 +1,32 @@
+#sswi_container {
+  width: 800px;
+  margin: auto;
+  text-align: center;
+}
+
+#sswi_config {
+  display: flex;
+  justify-content: center;
+}
+
+#sswi_config p {
+  margin: 0 20px;
+}
+
+#sswi_colorscale {
+  height: 30px;
+  display: flex;
+}
+
+#sswi_colorscale * {
+  flex-grow: 1;
+}
+
+#sswi_spinner {
+  margin-top: 20px;
+}
+
 #sswi_map {
-  width: 545px;
-  height: 490px;
+  margin-top: 20px;
+  height: 700px;
 }

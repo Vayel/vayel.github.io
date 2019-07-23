@@ -16,27 +16,30 @@ layout:
   </head>
 
   <body>
-    <div id="spinner">Loading...</div>
-    <div id="sswi_config">
-      <p>
-        <label>Horizon :</label>
-        <select id="sswi_horizon">
-          <option value="H1">H1</option>
-          <option value="H2">H2</option>
-          <option value="H3">H3</option>
-        </select>
-      </p>
-      <p>
-        <label>Saison :</label>
-        <select id="sswi_season">
-          <option value="spring">Printemps</option>
-          <option value="summer">Eté</option>
-          <option value="autumn">Automne</option>
-          <option value="winter">Hiver</option>
-        </select>
-      </p>
+    <div id="sswi_container">
+      <div id="sswi_config">
+        <p>
+          <label>Horizon :</label>
+          <select id="sswi_horizon">
+            <option value="H1">H1</option>
+            <option value="H2">H2</option>
+            <option value="H3">H3</option>
+          </select>
+        </p>
+        <p>
+          <label>Saison :</label>
+          <select id="sswi_season">
+            <option value="spring">Printemps</option>
+            <option value="summer">Eté</option>
+            <option value="autumn">Automne</option>
+            <option value="winter">Hiver</option>
+          </select>
+        </p>
+      </div>
+      <div id="sswi_colorscale"></div>
+      <div id="sswi_spinner">Loading...</div>
+      <div id="sswi_map"></div>
     </div>
-    <div id="sswi_map"></div>
 
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"
    integrity="sha512-GffPMF3RvMeYyc1LWMHtK8EbPv0iNZ8/oTtHPx9/cc2ILxQ+u905qIwdpULaqDkyBKgOaB57QTMg7ztg8Jm2Og=="
