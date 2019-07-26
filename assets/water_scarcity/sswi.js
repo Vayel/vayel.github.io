@@ -5,7 +5,7 @@ const SSWI = (mapId, horizonSelectId, seasonSelectId, colorscaleId, spinnerId, r
     zoomControl: false,
     dragging: false,
     scrollWheelZoom: false
-  }).setView([46.3630104, 2.9846608], 5.5);
+  }).setView([46.3630104, 2.9846608], 5);
   L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
@@ -21,18 +21,21 @@ const SSWI = (mapId, horizonSelectId, seasonSelectId, colorscaleId, spinnerId, r
 
   const toAbsValue = (percentage, min, max) => min + percentage * (max - min);
 
-  const renderColorScale = (wrapperId, min, max, steps = 10) => {
+  const renderColorScale = (wrapperId, min, max) => {
     const wrapper = document.getElementById(wrapperId);
     wrapper.innerHTML = "";
-    return; // TODO
 
-    let stepDiv, color;
-    for (let i = 0; i < steps; i++) {
-      color = sswiToColor(toAbsValue(i / (steps - 1), min, max), min, max);
-      stepDiv = document.createElement("div");
-      stepDiv.style.minHeight = "100%";
-      stepDiv.style.background = color;
-      wrapper.appendChild(stepDiv);
+    for (let sswi of [min, min / 2.0, 0, max / 2.0, max]) {
+      let div = document.createElement("div");
+      let label = document.createElement("p");
+      label.innerHTML = sswi.toFixed(1);
+      div.appendChild(label);
+
+      let colorDiv = document.createElement("div");
+      colorDiv.style.background = sswiToColor(sswi, min, max);
+      div.appendChild(colorDiv);
+
+      wrapper.appendChild(div);
     }
   };
 
@@ -71,7 +74,7 @@ const SSWI = (mapId, horizonSelectId, seasonSelectId, colorscaleId, spinnerId, r
         pointToLayer: (feature, latlng) => {
           const color = sswiToColor(feature.properties.sswi, data.sswi.min, data.sswi.max);
           return L.circleMarker(latlng, {
-            radius: 3.5,
+            radius: 1.5,
             fillColor: color,
             fillOpacity: 1,
             color: color,

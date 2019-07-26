@@ -1,6 +1,6 @@
 #sswi_container {
-  width: 800px;
   margin: auto;
+  width: 600px;
   text-align: center;
 }
 
@@ -14,12 +14,26 @@
 }
 
 #sswi_colorscale {
-  height: 30px;
   display: flex;
+  justify-content: center;
+  margin-top: 20px;
 }
 
-#sswi_colorscale * {
-  flex-grow: 1;
+#sswi_colorscale > div {
+  height: 50px;
+  width: 40px;
+  text-align: center;
+}
+
+#sswi_colorscale > div p {
+  margin: 0;
+}
+
+#sswi_colorscale > div div {
+  width: 20px;
+  height: 20px;
+  border: 1px solid #000;
+  margin: auto;
 }
 
 #sswi_spinner {
@@ -27,6 +41,8 @@
 }
 
 #sswi_map {
+  margin: auto;
   margin-top: 20px;
-  height: 700px;
+  width: 400px;
+  height: 350px;
 }
