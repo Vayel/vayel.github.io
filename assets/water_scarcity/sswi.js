@@ -15,37 +15,24 @@ const SSWI = (mapId, horizonSelectId, seasonSelectId, colorscaleId, colorscale, 
 
   const fetchData = (fname) => fetch(rootUrl + fname).then((response) => response.json());
 
-  const renderColorScale = (wrapper, colorscale) => {
-    let prevLevel;
-    for (let level of colorscale) {
+  const renderColorScale = (wrapperId, colors, legends) => {
+    const wrapper = document.getElementById(wrapperId);
+
+    for (let i in colors) {
       let row = document.createElement("div");
 
       let colorBox = document.createElement("div");
       colorBox.className = "color_box";
-      colorBox.style.background = level.color;
+      colorBox.style.background = colors[i];
       row.appendChild(colorBox);
 
-      let range = prevLevel ? (
-        prevLevel.maxSSWI + " < sswi < " + level.maxSSWI
-      ) : (
-        "sswi < " + level.maxSSWI
-      );
-
       let legend = document.createElement("p");
-      legend.innerHTML = level.legend + " (" + range + ")";
+      legend.innerHTML = legends[i];
       legend.className = "legend";
       row.appendChild(legend);
 
       wrapper.appendChild(row);
-      prevLevel = level;
     }
-  };
-
-  const sswiToColor = (sswi) => {
-    for (let level of colorscale) {
-      if (sswi < level.maxSSWI) return level.color;
-    }
-    return "transparent";
   };
 
   const showSpinner = (show = true) => {
@@ -55,21 +42,21 @@ const SSWI = (mapId, horizonSelectId, seasonSelectId, colorscaleId, colorscale, 
   };
 
   const onEachFeature = (feature, layer) => {
-    if (feature.properties && feature.properties.sswi !== undefined) {
-      layer.bindPopup(feature.properties.sswi);
+    if (feature.properties && feature.properties.riskLevel !== undefined) {
+      layer.bindPopup(feature.properties.riskLevel);
     }
   };
 
   const update = () => {
     showSpinner();
-    fetchData(getDataFname()).then((data) => {
+    fetchData(getDataFname()).then(geojson => {
       if (layer !== undefined) {
         map.removeLayer(layer);
       }
-      layer = L.geoJSON(data.geojson, {
+      layer = L.geoJSON(geojson, {
         onEachFeature: onEachFeature,
         pointToLayer: (feature, latlng) => {
-          const color = sswiToColor(feature.properties.sswi);
+          const color = colorscale[feature.properties.riskLevel];
           return L.circleMarker(latlng, {
             radius: 1.5,
             fillColor: color,
@@ -87,6 +74,8 @@ const SSWI = (mapId, horizonSelectId, seasonSelectId, colorscaleId, colorscale, 
 
   horizonSelect.addEventListener("change", update);
   seasonSelect.addEventListener("change", update);
-  renderColorScale(document.getElementById(colorscaleId), colorscale);
   update();
+  fetchData("metadata.json").then(
+    data => renderColorScale(colorscaleId, colorscale, data.riskLevels)
+  );
 };

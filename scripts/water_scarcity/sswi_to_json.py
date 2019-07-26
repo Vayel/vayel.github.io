@@ -46,6 +46,13 @@ def convert(csvfile, dest):
         sswi = float(sswi)
         min_sswi = min(sswi, min_sswi)
         max_sswi = max(sswi, max_sswi)
+
+        risk_level = 0
+        if sswi < -1.4:  # TODO: karstic area?
+            risk_level = 2
+        elif sswi < -0.7:
+            risk_level = 1
+
         features[horizon][season].append({
             "type": "Feature",
             "geometry": {
@@ -53,7 +60,7 @@ def convert(csvfile, dest):
                 "coordinates": [lng, lat],
             },
             "properties": {
-                "sswi": sswi,
+                "riskLevel": risk_level,
             }
         })
 
@@ -61,14 +68,23 @@ def convert(csvfile, dest):
         for season, points in horizon_data.items():
             dump_json(
                 {
-                    "sswi": { "min": min_sswi, "max": max_sswi },
-                    "geojson": {
-                        "type": "FeatureCollection",
-                        "features": points,
-                    }
+                    "type": "FeatureCollection",
+                    "features": points,
                 },
                 os.path.join(dest, f"{horizon}_{season}.json")
             )
+    dump_json(
+        {
+            "sswi": dict(min=min_sswi, max=max_sswi),
+            "riskLevels": [
+                "",
+                "Limitations de tous les prélèvements d'eau (-1.4 < sswi < -0.7)",
+                "Interdiction d'utiliser l'eau pour des usages non prioritaires (sswi < -1.4 + zone non karstique)",
+                "Menaces de pénuries en eau potable (sswi < -1.4 + zone karstique)"
+            ],
+        },
+        os.path.join(dest, f"metadata.json")
+    )
 
 
 if __name__ == "__main__":
