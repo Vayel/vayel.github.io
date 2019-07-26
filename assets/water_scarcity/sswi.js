@@ -1,7 +1,7 @@
 const SSWI = (mapId, horizonSelectId, seasonSelectId, colorscaleId, colorscale, spinnerId, rootUrl = "/assets/water_scarcity/data/sswi/") => {
   const horizonSelect = document.getElementById(horizonSelectId);
   const seasonSelect = document.getElementById(seasonSelectId);
-  const map = L.map(mapId).setView([46.3630104, 2.9846608], 5);
+  const map = L.map(mapId).setView([46.4, 2.5], 5.5);
   L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
@@ -71,7 +71,7 @@ const SSWI = (mapId, horizonSelectId, seasonSelectId, colorscaleId, colorscale, 
         pointToLayer: (feature, latlng) => {
           const color = sswiToColor(feature.properties.sswi);
           return L.circleMarker(latlng, {
-            radius: 1.5,
+            radius: 3.5,
             fillColor: color,
             fillOpacity: 1,
             color: color,

@@ -1,7 +1,7 @@
 #sswi_container {
   margin: auto;
-  width: 600px;
-  text-align: center;
+  display: flex;
+  flex-direction: column;
 }
 
 #sswi_config {
@@ -16,6 +16,7 @@
 
 #sswi_colorscale {
   margin-top: 20px;
+  margin: auto;
 }
 
 #sswi_colorscale > div {
@@ -39,6 +40,6 @@
 #sswi_map {
   margin: auto;
   margin-top: 20px;
-  width: 400px;
-  height: 350px;
+  width: 700px;
+  height: 650px;
 }
