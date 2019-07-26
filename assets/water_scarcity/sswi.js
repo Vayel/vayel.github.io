@@ -1,11 +1,7 @@
-const SSWI = (mapId, horizonSelectId, seasonSelectId, colorscaleId, spinnerId, rootUrl = "/assets/water_scarcity/data/sswi/") => {
+const SSWI = (mapId, horizonSelectId, seasonSelectId, colorscaleId, colorscale, spinnerId, rootUrl = "/assets/water_scarcity/data/sswi/") => {
   const horizonSelect = document.getElementById(horizonSelectId);
   const seasonSelect = document.getElementById(seasonSelectId);
-  const map = L.map(mapId, {
-    zoomControl: false,
-    dragging: false,
-    scrollWheelZoom: false
-  }).setView([46.3630104, 2.9846608], 5);
+  const map = L.map(mapId).setView([46.3630104, 2.9846608], 5);
   L.tileLayer("http://{s}.tile.osm.org/{z}/{x}/{y}.png", {
     attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'
 }).addTo(map);
@@ -19,60 +15,61 @@ const SSWI = (mapId, horizonSelectId, seasonSelectId, colorscaleId, spinnerId, r
 
   const fetchData = (fname) => fetch(rootUrl + fname).then((response) => response.json());
 
-  const toAbsValue = (percentage, min, max) => min + percentage * (max - min);
+  const renderColorScale = (wrapper, colorscale) => {
+    let prevLevel;
+    for (let level of colorscale) {
+      let row = document.createElement("div");
 
-  const renderColorScale = (wrapperId, min, max) => {
-    const wrapper = document.getElementById(wrapperId);
-    wrapper.innerHTML = "";
+      let colorBox = document.createElement("div");
+      colorBox.className = "color_box";
+      colorBox.style.background = level.color;
+      row.appendChild(colorBox);
 
-    for (let sswi of [min, min / 2.0, 0, max / 2.0, max]) {
-      let div = document.createElement("div");
-      let label = document.createElement("p");
-      label.innerHTML = sswi.toFixed(1);
-      div.appendChild(label);
+      let range = prevLevel ? (
+        prevLevel.maxSSWI + " < sswi < " + level.maxSSWI
+      ) : (
+        "sswi < " + level.maxSSWI
+      );
 
-      let colorDiv = document.createElement("div");
-      colorDiv.style.background = sswiToColor(sswi, min, max);
-      div.appendChild(colorDiv);
+      let legend = document.createElement("p");
+      legend.innerHTML = level.legend + " (" + range + ")";
+      legend.className = "legend";
+      row.appendChild(legend);
 
-      wrapper.appendChild(div);
+      wrapper.appendChild(row);
+      prevLevel = level;
     }
   };
 
-  // TODO
-  const sswiToColor = (sswi, min, max) => {
-    if (sswi < 0) {
-      const lum = toAbsValue(1 - sswi / min, 20, 100);
-      return "hsl(0, 100%, " + lum + "%)";
+  const sswiToColor = (sswi) => {
+    for (let level of colorscale) {
+      if (sswi < level.maxSSWI) return level.color;
     }
-    if (sswi > 0) {
-      const lum = toAbsValue(1 - sswi / max, 20, 100);
-      return "hsl(240, 100%, " + lum + "%)";
-    }
-    return "white";
+    return "transparent";
   };
 
   const showSpinner = (show = true) => {
     const spinner = document.getElementById(spinnerId);
-    if (show) spinner.style.display = "block";
-    else spinner.style.display = "none";
+    if (show) spinner.style.visibility = "visible";
+    else spinner.style.visibility = "hidden";
   };
 
   const onEachFeature = (feature, layer) => {
-    layer.bindPopup(feature.properties.sswi);
+    if (feature.properties && feature.properties.sswi !== undefined) {
+      layer.bindPopup(feature.properties.sswi);
+    }
   };
 
   const update = () => {
     showSpinner();
     fetchData(getDataFname()).then((data) => {
-    renderColorScale(colorscaleId, data.sswi.min, data.sswi.max);
       if (layer !== undefined) {
         map.removeLayer(layer);
       }
       layer = L.geoJSON(data.geojson, {
         onEachFeature: onEachFeature,
         pointToLayer: (feature, latlng) => {
-          const color = sswiToColor(feature.properties.sswi, data.sswi.min, data.sswi.max);
+          const color = sswiToColor(feature.properties.sswi);
           return L.circleMarker(latlng, {
             radius: 1.5,
             fillColor: color,
@@ -90,5 +87,6 @@ const SSWI = (mapId, horizonSelectId, seasonSelectId, colorscaleId, spinnerId, r
 
   horizonSelect.addEventListener("change", update);
   seasonSelect.addEventListener("change", update);
+  renderColorScale(document.getElementById(colorscaleId), colorscale);
   update();
 };

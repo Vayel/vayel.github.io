@@ -7,6 +7,7 @@
 #sswi_config {
   display: flex;
   justify-content: center;
+  align-items: center;
 }
 
 #sswi_config p {
@@ -14,30 +15,25 @@
 }
 
 #sswi_colorscale {
-  display: flex;
-  justify-content: center;
   margin-top: 20px;
 }
 
 #sswi_colorscale > div {
-  height: 50px;
-  width: 40px;
-  text-align: center;
+  display: flex;
+  align-items: top;
+  margin-top: 10px;
 }
 
-#sswi_colorscale > div p {
-  margin: 0;
-}
-
-#sswi_colorscale > div div {
-  width: 20px;
+#sswi_colorscale > div .color_box {
   height: 20px;
-  border: 1px solid #000;
-  margin: auto;
+  width: 20px;
+  margin-right: 10px;
 }
 
-#sswi_spinner {
-  margin-top: 20px;
+#sswi_colorscale > div .legend {
+  margin: 0;
+  text-align: left;
+  font-size: 14px;
 }
 
 #sswi_map {
