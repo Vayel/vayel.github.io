@@ -17,11 +17,12 @@ layout:
   </head>
 
   <body>
-    <div id="sswi_container">
-      <div id="sswi_config">
+    <div id="container">
+      <h1>Y a-t-il un risque de pénurie d'eau sur mon territoire ?</h1>
+      <div id="config">
         <p>
           <label>Horizon :</label>
-          <select id="sswi_horizon">
+          <select id="horizon">
             <option value="H1">H1</option>
             <option value="H2">H2</option>
             <option value="H3">H3</option>
@@ -29,19 +30,30 @@ layout:
         </p>
         <p>
           <label>Saison :</label>
-          <select id="sswi_season">
+          <select id="season">
             <option value="spring">Printemps</option>
             <option value="summer">Eté</option>
             <option value="autumn">Automne</option>
             <option value="winter">Hiver</option>
           </select>
         </p>
-        <div id="sswi_spinner">
+        <div id="spinner">
           <i class="fa fa-snowflake-o fa-spin"></i>
         </div>
       </div>
-      <div id="sswi_colorscale"></div>
-      <div id="sswi_map"></div>
+      <div id="map_wrapper">
+        <div id="map"></div>
+        <div id="colorscale"></div>
+      </div>
+      <div id="explanations">
+        <h2>Explications</h2>
+        Résumé : on se base sur le SSWI et le type de roche 
+
+        <h3>Indice de sécheresse agricole</h3>
+        En quoi ça consiste, qui l'a développé, pourquoi, ses avantages, ses inconvénients, ses alternatives, comment il est prédit, pourquoi les seuils de -1.4 et -0.7
+        <h3>Zones karstiques</h3>
+        Pourquoi on a besoin de considérer le type de roche, ce qu'est une roche karstique
+      </div>
     </div>
 
     <script src="https://unpkg.com/leaflet@1.5.1/dist/leaflet.js"

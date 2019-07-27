@@ -1,45 +1,57 @@
-#sswi_container {
+#container {
   margin: auto;
   display: flex;
   flex-direction: column;
 }
 
-#sswi_config {
+h1, h2, h3 {
+  font-variant: small-caps;
+  font-weight: normal;
+}
+
+h1 {
+  text-align: center;
+}
+
+#config {
   display: flex;
   justify-content: center;
   align-items: center;
 }
 
-#sswi_config p {
+#config p {
   margin: 0 20px;
 }
 
-#sswi_colorscale {
-  margin-top: 20px;
-  margin: auto;
-}
-
-#sswi_colorscale > div {
+#map_wrapper {
   display: flex;
-  align-items: top;
-  margin-top: 10px;
+  justify-content: center;
+  margin-top: 40px;
 }
 
-#sswi_colorscale > div .color_box {
+#colorscale {
+  width: 500px;
+}
+
+#colorscale > div {
+  display: flex;
+  margin-bottom: 30px;
+}
+
+#colorscale > div .color_box {
   height: 20px;
   width: 20px;
+  flex: 0 0 20px;
   margin-right: 10px;
 }
 
-#sswi_colorscale > div .legend {
+#colorscale > div .legend {
   margin: 0;
-  text-align: left;
   font-size: 14px;
 }
 
-#sswi_map {
-  margin: auto;
-  margin-top: 20px;
+#map {
+  margin-right: 50px;
   width: 400px;
   height: 370px;
 }
