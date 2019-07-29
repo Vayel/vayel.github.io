@@ -1,0 +1,74 @@
+---
+title: Pénuries d'eau 
+permalink: /pénuries-eau-ui/
+layout:
+---
+
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" type="text/css" href="{{ '/assets/water_scarcity/ui.css' | relative_url }}">
+    {% seo %}
+  </head>
+
+  <body>
+    <header>
+      <h1>Y a-t-il un risque de pénurie d'eau sur mon territoire ?</h1>
+      <h2>Au moins une saison par an, il y aura...</h2>
+    </header>
+    <section>
+      <div id="legend"></div>
+      <div class="maps_wrapper">
+        <div class="map_wrapper">
+          <p>En H1</p>
+          <img src="{{ '/assets/water_scarcity/img/H1_summer.png' | relative_url }}" alt="Carte H1" />
+        </div>
+        <div class="map_wrapper">
+          <p>En H2</p>
+          <img src="{{ '/assets/water_scarcity/img/H2_summer.png' | relative_url }}" alt="Carte H2" />
+        </div>
+        <div class="map_wrapper">
+          <p>En H3</p>
+          <img src="{{ '/assets/water_scarcity/img/H3_summer.png' | relative_url }}" alt="Carte H3" />
+        </div>
+      </div>
+    </section>
+    <section>
+      <h2>Le détail par saison</h2>
+      <div id="config">
+        <p>
+          <label>Horizon :</label>
+          <select id="horizon">
+            <option value="H1">H1</option>
+            <option value="H2">H2</option>
+            <option value="H3">H3</option>
+          </select>
+        </p>
+        <p>
+          <label>Saison :</label>
+          <select id="season">
+            <option value="spring">Printemps</option>
+            <option value="summer">Eté</option>
+            <option value="autumn">Automne</option>
+            <option value="winter">Hiver</option>
+          </select>
+        </p>
+      </div>
+      <div id="map_wrapper">
+        <img id="map" src="" alt="Carte" />
+      </div>
+    </section>
+    <section>
+      <h2>Explications</h2>
+      Résumé : on se base sur le SSWI et le type de roche 
+
+      <h3>Indice de sécheresse agricole</h3>
+      En quoi ça consiste, qui l'a développé, pourquoi, ses avantages, ses inconvénients, ses alternatives, comment il est prédit, pourquoi les seuils de -1.4 et -0.7
+      <h3>Zones karstiques</h3>
+      Pourquoi on a besoin de considérer le type de roche, ce qu'est une roche karstique
+    </section>
+
+    <script src="{{ '/assets/water_scarcity/ui.js' | relative_url }}"></script>
+  </body>
+</html>

@@ -2,3 +2,4 @@ vendor/*
 _site/*
 .bundle/*
 Gemfile.lock
+assets/water_scarcity/data/karst.json
