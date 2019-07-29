@@ -84,6 +84,13 @@ section {
 }
 
 #map_wrapper {
-  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
   margin-top: 20px;
+}
+
+#map_wrapper p {
+  margin: 0 20px;
+  font-size: 60px;
 }

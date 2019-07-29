@@ -35,7 +35,16 @@ layout:
       </div>
     </section>
     <section>
-      <h2>Le détail par saison</h2>
+      <h2>Explications</h2>
+      Résumé : on se base sur le SSWI et le type de roche 
+
+      <h3>Indice de sécheresse agricole</h3>
+      En quoi ça consiste, qui l'a développé, pourquoi, ses avantages, ses inconvénients, ses alternatives, comment il est prédit, pourquoi les seuils de -1.4 et -0.7
+      <h3>Zones karstiques</h3>
+      Pourquoi on a besoin de considérer le type de roche, ce qu'est une roche karstique
+    </section>
+    <section>
+      <h2>Les données détaillées</h2>
       <div id="config">
         <p>
           <label>Horizon :</label>
@@ -56,17 +65,12 @@ layout:
         </p>
       </div>
       <div id="map_wrapper">
-        <img id="map" src="" alt="Carte" />
+        <img id="sswi_map" src="" alt="Carte des indices de sécheresse agricole" />
+        <p>+</p>
+        <img id="karst_map" src="" alt="Carte des zones karstiques" />
+        <p>=</p>
+        <img id="map" src="" alt="Carte des risques de pénurie d'eau" />
       </div>
-    </section>
-    <section>
-      <h2>Explications</h2>
-      Résumé : on se base sur le SSWI et le type de roche 
-
-      <h3>Indice de sécheresse agricole</h3>
-      En quoi ça consiste, qui l'a développé, pourquoi, ses avantages, ses inconvénients, ses alternatives, comment il est prédit, pourquoi les seuils de -1.4 et -0.7
-      <h3>Zones karstiques</h3>
-      Pourquoi on a besoin de considérer le type de roche, ce qu'est une roche karstique
     </section>
 
     <script src="{{ '/assets/water_scarcity/ui.js' | relative_url }}"></script>
