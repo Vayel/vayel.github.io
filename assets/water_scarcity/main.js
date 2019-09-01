@@ -4,7 +4,7 @@
     "horizon",
     "season",
     "colorscale",
-    ["transparent", "#e08f17", "#a9381c", "#000000"],
+    ["transparent", "#e08f17", "#ef0d1f", "#000000"],
     "spinner"
   );
 })();

@@ -1,1 +1,1 @@
-{"sswi":{"min":-7.37,"max":3.33},"riskLevels":["","Limitations de tous les prélèvements d'eau (-1.4 < sswi < -0.7)","Interdiction d'utiliser l'eau pour des usages non prioritaires (sswi < -1.4 + zone non karstique)","Menaces de pénuries en eau potable (sswi < -1.4 + zone karstique)"]}
+{"sswi":{"min":-7.37,"max":3.33},"riskLevels":["","Limitations de tous les prélèvements d'eau","Interdiction d'utiliser l'eau pour des usages non prioritaires","Menaces de pénuries en eau potable"]}
